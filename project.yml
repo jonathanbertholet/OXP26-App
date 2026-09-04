@@ -1,0 +1,57 @@
+name: OXP
+options:
+  bundleIdPrefix: com.jonathanbertholet
+  deploymentTarget:
+    iOS: "26.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "6.2"
+    IPHONEOS_DEPLOYMENT_TARGET: "26.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    SWIFT_STRICT_CONCURRENCY: complete
+    GENERATE_INFOPLIST_FILE: YES
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "3"
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    DEVELOPMENT_TEAM: 5ML267PKP2
+
+targets:
+  OXP:
+    type: application
+    platform: iOS
+    sources:
+      - path: OXP
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jonathanbertholet.oxp
+        PRODUCT_NAME: OXP
+        INFOPLIST_KEY_CFBundleDisplayName: OXP
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.business
+        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: OXP uses your location to show you on the Brussels Expo campus map.
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_UIRequiresFullScreen: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 5ML267PKP2
+  OXPTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: OXPTests
+    dependencies:
+      - target: OXP
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jonathanbertholet.oxp.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/OXP.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OXP"
+        BUNDLE_LOADER: "$(TEST_HOST)"

@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+*.pyc
+xcuserdata/
+*.xcuserstate
+DerivedData/
+.build/
+.wrangler/
+.cache/
+screenshots/raw/
+*.xcarchive
+*.ipa

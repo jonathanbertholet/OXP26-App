@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OXP 2026 seed preview</title>
+    <style>
+      :root {
+        --bg: #f6f4f2;
+        --ink: #1c1917;
+        --muted: #57534e;
+        --line: #e7e5e4;
+        --card: #fff;
+        --accent: #714b67;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; }
+      body {
+        font: 15px/1.45 ui-sans-serif, system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: var(--card);
+        border-bottom: 1px solid var(--line);
+        padding: 16px 20px 12px;
+      }
+      h1 { font-size: 18px; margin: 0 0 4px; }
+      .meta { color: var(--muted); font-size: 13px; }
+      .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+      input, select {
+        border: 1px solid var(--line);
+        background: var(--bg);
+        border-radius: 8px;
+        padding: 8px 10px;
+        font: inherit;
+      }
+      input { min-width: 220px; flex: 1; }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+        min-height: calc(100% - 120px);
+      }
+      @media (max-width: 900px) {
+        .layout { grid-template-columns: 1fr; }
+      }
+      .list { padding: 12px 16px 48px; }
+      .group { margin: 18px 0 8px; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+      .row {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr) 140px;
+        gap: 10px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin: 0 0 8px;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+        font: inherit;
+        color: inherit;
+      }
+      .row:hover, .row.active { border-color: var(--accent); }
+      .when { color: var(--muted); font-variant-numeric: tabular-nums; }
+      .title { font-weight: 650; }
+      .sub { color: var(--muted); font-size: 13px; }
+      .loc { color: var(--muted); font-size: 13px; text-align: right; }
+      .badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+      .badge {
+        font-size: 11px;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: #efe8ed;
+        color: var(--accent);
+      }
+      aside {
+        border-left: 1px solid var(--line);
+        background: var(--card);
+        padding: 20px;
+        overflow: auto;
+      }
+      aside h2 { margin: 0 0 8px; font-size: 20px; }
+      aside .bio, aside .desc { white-space: pre-wrap; }
+      .empty { color: var(--muted); padding: 40px 20px; }
+      a { color: var(--accent); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Odoo Experience 2026</h1>
+      <div class="meta" id="meta">Loading seed…</div>
+      <div class="toolbar">
+        <select id="event" hidden></select>
+        <input id="q" type="search" placeholder="Search talks, speakers, rooms" />
+        <select id="day"><option value="">All days</option></select>
+        <select id="kind"><option value="">All types</option></select>
+        <select id="loc"><option value="">All rooms</option></select>
+      </div>
+    </header>
+    <div class="layout">
+      <div class="list" id="list"></div>
+      <aside id="detail"><div class="empty">Pick a talk.</div></aside>
+    </div>
+    <script>
+      const state = { bundle: null, data: null, selected: null };
+
+      const $ = (id) => document.getElementById(id);
+
+      function payloadFor(bundle, eventId) {
+        if (Array.isArray(bundle.events)) {
+          const id = Number(eventId);
+          return bundle.events.find((item) => item.event.id === id) || bundle.events[0];
+        }
+        return bundle;
+      }
+
+      function fillSelect(id, values, placeholder) {
+        const el = $(id);
+        el.innerHTML = "";
+        const all = document.createElement("option");
+        all.value = "";
+        all.textContent = placeholder;
+        el.appendChild(all);
+        for (const value of values) {
+          const opt = document.createElement("option");
+          opt.value = value;
+          opt.textContent = value;
+          el.appendChild(opt);
+        }
+      }
+
+      function showEvent(eventId) {
+        state.data = payloadFor(state.bundle, eventId);
+        state.selected = null;
+        const event = state.data.event;
+        const stats = state.data.stats || {
+          tracks: (state.data.tracks || []).length,
+          exhibitors: (state.data.exhibitors || []).length,
+        };
+        const name = event.short_name || event.name;
+        $("meta").textContent = `${name} · ${event.venue_name} · ${stats.tracks} talks · ${stats.exhibitors} exhibitors`;
+        fillSelect("day", stats.days || [...new Set((state.data.tracks || []).map((t) => t.day).filter(Boolean))].sort(), "All days");
+        fillSelect("kind", [...new Set((state.data.tracks || []).map((t) => t.kind))].sort(), "All types");
+        fillSelect("loc", state.data.locations || [], "All rooms");
+        $("detail").innerHTML = '<div class="empty">Pick a talk.</div>';
+        renderList();
+      }
+
+      function matches(track, q, day, kind, loc) {
+        if (day && track.day !== day) return false;
+        if (kind && track.kind !== kind) return false;
+        if (loc && track.location !== loc) return false;
+        if (!q) return true;
+        const blob = [
+          track.name,
+          track.speaker_line,
+          track.location,
+          track.description_text,
+          ...(track.tags || []).map((t) => t.name),
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        return blob.includes(q);
+      }
+
+      function renderList() {
+        const q = $("q").value.trim().toLowerCase();
+        const day = $("day").value;
+        const kind = $("kind").value;
+        const loc = $("loc").value;
+        const tracks = state.data.tracks.filter((t) =>
+          matches(t, q, day, kind, loc)
+        );
+        const groups = new Map();
+        for (const t of tracks) {
+          const key = t.day || "Coming soon";
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key).push(t);
+        }
+        const list = $("list");
+        list.innerHTML = "";
+        if (!tracks.length) {
+          list.innerHTML = '<div class="empty">No talks match.</div>';
+          return;
+        }
+        for (const [key, items] of groups) {
+          const label =
+            key === "Coming soon"
+              ? "Coming soon"
+              : `${items[0].weekday || ""} ${key}`.trim();
+          const h = document.createElement("div");
+          h.className = "group";
+          h.textContent = `${label} · ${items.length}`;
+          list.appendChild(h);
+          for (const t of items) {
+            const row = document.createElement("button");
+            row.type = "button";
+            row.className = "row" + (state.selected === t.id ? " active" : "");
+            row.innerHTML = `
+              <div class="when">${t.start_time || "TBA"}</div>
+              <div>
+                <div class="title">${escapeHtml(t.name)}</div>
+                <div class="sub">${escapeHtml(t.speaker_line || "")}</div>
+                <div class="badges">${(t.tags || [])
+                  .slice(0, 3)
+                  .map((tag) => `<span class="badge">${escapeHtml(tag.name)}</span>`)
+                  .join("")}</div>
+              </div>
+              <div class="loc">${escapeHtml(t.location || "")}<br>${escapeHtml(
+                t.duration_label || ""
+              )}</div>`;
+            row.addEventListener("click", () => {
+              state.selected = t.id;
+              renderList();
+              renderDetail(t);
+            });
+            list.appendChild(row);
+          }
+        }
+      }
+
+      function renderDetail(t) {
+        const speakers = (t.speakers || [])
+          .map((s) => {
+            const who = [s.name, s.function, s.company].filter(Boolean).join(" · ");
+            const bio = s.biography_text
+              ? `<p class="bio">${escapeHtml(s.biography_text)}</p>`
+              : "";
+            return `<p><strong>${escapeHtml(who)}</strong></p>${bio}`;
+          })
+          .join("");
+        $("detail").innerHTML = `
+          <h2>${escapeHtml(t.name)}</h2>
+          <p class="meta">${[t.weekday, t.day, t.start_time && t.end_time ? `${t.start_time}–${t.end_time}` : t.time_label, t.location]
+            .filter(Boolean)
+            .join(" · ")}</p>
+          <p class="badges">${(t.tags || [])
+            .map((tag) => `<span class="badge">${escapeHtml(tag.name)}</span>`)
+            .join("")}</p>
+          ${speakers}
+          <div class="desc">${escapeHtml(t.description_text || "No description on the public page yet.")}</div>
+          ${t.url ? `<p><a href="${t.url}" target="_blank" rel="noreferrer">Official page</a></p>` : ""}
+        `;
+      }
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+      }
+
+      fetch("../data/oxp-2026.json")
+        .then((r) => {
+          if (!r.ok) throw new Error("Missing data/oxp-2026.json — run the scraper first.");
+          return r.json();
+        })
+        .then((data) => {
+          state.bundle = data;
+          const events = Array.isArray(data.events) ? data.events : [data];
+          const picker = $("event");
+          if (events.length > 1) {
+            picker.hidden = false;
+            picker.innerHTML = "";
+            for (const item of events) {
+              const opt = document.createElement("option");
+              opt.value = item.event.id;
+              const range = [item.event.starts_on, item.event.ends_on].filter(Boolean).join("–");
+              opt.textContent = `${item.event.short_name || item.event.name}${range ? " · " + range : ""}`;
+              picker.appendChild(opt);
+            }
+            const preferred = data.default_event_id || 9099;
+            picker.value = String(
+              events.some((item) => item.event.id === preferred)
+                ? preferred
+                : events[0].event.id
+            );
+            picker.addEventListener("change", () => showEvent(picker.value));
+          }
+          ["q", "day", "kind", "loc"].forEach((id) =>
+            $(id).addEventListener("input", renderList)
+          );
+          showEvent(picker.value || events[0].event.id);
+        })
+        .catch((err) => {
+          $("meta").textContent = err.message;
+        });
+    </script>
+  </body>
+</html>

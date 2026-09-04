@@ -1,0 +1,3670 @@
+{
+  "event": {
+    "id": 10327,
+    "code": "us",
+    "short_name": "Americas",
+    "name": "Odoo Experience Americas 2026",
+    "slug": "odoo-experience-2026-americas-10327",
+    "timezone": "America/Los_Angeles",
+    "venue_name": "Pier 27",
+    "venue_address": "The Embarcadero, San Francisco, CA",
+    "country_code": "US",
+    "has_map": false,
+    "website_url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327",
+    "agenda_url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/agenda",
+    "tracks_url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/track",
+    "exhibitors_url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitors",
+    "starts_on": null,
+    "ends_on": null,
+    "scraped_at": "2026-09-04T02:15:15+02:00"
+  },
+  "stats": {
+    "tracks": 0,
+    "tracks_with_description": 0,
+    "speakers": 0,
+    "tags": 421,
+    "locations": 0,
+    "exhibitors": 41,
+    "days": []
+  },
+  "tag_categories": [
+    {
+      "id": 1,
+      "name": "Audience"
+    },
+    {
+      "id": 4,
+      "name": "Speaker"
+    },
+    {
+      "id": 8,
+      "name": "Topics"
+    },
+    {
+      "id": 7,
+      "name": "Tracks"
+    },
+    {
+      "id": 2,
+      "name": "Format"
+    },
+    {
+      "id": 5,
+      "name": "Version"
+    },
+    {
+      "id": 3,
+      "name": "Edition"
+    }
+  ],
+  "tags": [
+    {
+      "id": 3,
+      "name": "Leadership",
+      "category_id": 1,
+      "category": "Audience",
+      "color": 9
+    },
+    {
+      "id": 1,
+      "name": "Developers",
+      "category_id": 1,
+      "category": "Audience",
+      "color": 7
+    },
+    {
+      "id": 225,
+      "name": "Designers",
+      "category_id": 1,
+      "category": "Audience",
+      "color": 5
+    },
+    {
+      "id": 2,
+      "name": "Odoo Beginners",
+      "category_id": 1,
+      "category": "Audience",
+      "color": 10
+    },
+    {
+      "id": 432,
+      "name": "Odoo Experts",
+      "category_id": 1,
+      "category": "Audience",
+      "color": 11
+    },
+    {
+      "id": 72,
+      "name": "Students & Teachers",
+      "category_id": 1,
+      "category": "Audience",
+      "color": 5
+    },
+    {
+      "id": 183,
+      "name": "Business leaders",
+      "category_id": 4,
+      "category": "Speaker",
+      "color": 10
+    },
+    {
+      "id": 686,
+      "name": "Invited Speaker",
+      "category_id": 4,
+      "category": "Speaker",
+      "color": 7
+    },
+    {
+      "id": 149,
+      "name": "Community",
+      "category_id": 4,
+      "category": "Speaker",
+      "color": 6
+    },
+    {
+      "id": 434,
+      "name": "Influencer",
+      "category_id": 4,
+      "category": "Speaker",
+      "color": 3
+    },
+    {
+      "id": 145,
+      "name": "Odoo",
+      "category_id": 4,
+      "category": "Speaker",
+      "color": 5
+    },
+    {
+      "id": 29,
+      "name": "Partner",
+      "category_id": 4,
+      "category": "Speaker",
+      "color": 10
+    },
+    {
+      "id": 248,
+      "name": "Accounting & Finance",
+      "category_id": 8,
+      "category": "Topics",
+      "color": 2
+    },
+    {
+      "id": 381,
+      "name": "Artificial Intelligence",
+      "category_id": 8,
+      "category": "Topics",
+      "color": 3
+    },
+    {
+      "id": 284,
+      "name": "Business Intelligence",
+      "category_id": 8,
+      "category": "Topics",
+      "color": 5
+    },
+    {
+      "id": 367,
+      "name": "Human Resource",
+      "category_id": 8,
+      "category": "Topics",
+      "color": 6
+    },
+    {
+      "id": 359,
+      "name": "Logistic & Manufacturing",
+      "category_id": 8,
+      "category": "Topics",
+      "color": 9
+    },
+    {
+      "id": 384,
+      "name": "Marketing & eCommerce",
+      "category_id": 8,
+      "category": "Topics",
+      "color": 7
+    },
+    {
+      "id": 444,
+      "name": "Productivity & Project",
+      "category_id": 8,
+      "category": "Topics",
+      "color": 6
+    },
+    {
+      "id": 368,
+      "name": "Retail & Food",
+      "category_id": 8,
+      "category": "Topics",
+      "color": 11
+    },
+    {
+      "id": 393,
+      "name": "Sales",
+      "category_id": 8,
+      "category": "Topics",
+      "color": 3
+    },
+    {
+      "id": 328,
+      "name": "Accounting",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 6
+    },
+    {
+      "id": 332,
+      "name": "Innovation",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 4
+    },
+    {
+      "id": 333,
+      "name": "Website & eCommerce",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 7
+    },
+    {
+      "id": 361,
+      "name": "Logistic & Supply Chain",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 5
+    },
+    {
+      "id": 152,
+      "name": "Technicals",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 6
+    },
+    {
+      "id": 153,
+      "name": "Human Resources",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 3
+    },
+    {
+      "id": 357,
+      "name": "Manufacturing",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 10
+    },
+    {
+      "id": 435,
+      "name": "Food & Hospitality",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 6
+    },
+    {
+      "id": 154,
+      "name": "Startups",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 8
+    },
+    {
+      "id": 369,
+      "name": "Retail",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 9
+    },
+    {
+      "id": 433,
+      "name": "Services",
+      "category_id": 7,
+      "category": "Tracks",
+      "color": 1
+    },
+    {
+      "id": 181,
+      "name": "Talk",
+      "category_id": 2,
+      "category": "Format",
+      "color": 0
+    },
+    {
+      "id": 182,
+      "name": "Interview",
+      "category_id": 2,
+      "category": "Format",
+      "color": 0
+    },
+    {
+      "id": 229,
+      "name": "Ask Me Anything (AMA)",
+      "category_id": 2,
+      "category": "Format",
+      "color": 0
+    },
+    {
+      "id": 27,
+      "name": "Training",
+      "category_id": 2,
+      "category": "Format",
+      "color": 0
+    },
+    {
+      "id": 180,
+      "name": "Demo",
+      "category_id": 2,
+      "category": "Format",
+      "color": 0
+    },
+    {
+      "id": 436,
+      "name": "Keynote",
+      "category_id": 2,
+      "category": "Format",
+      "color": 0
+    },
+    {
+      "id": 353,
+      "name": "Odoo 17",
+      "category_id": 5,
+      "category": "Version",
+      "color": 0
+    },
+    {
+      "id": 487,
+      "name": "Odoo 18",
+      "category_id": 5,
+      "category": "Version",
+      "color": 0
+    },
+    {
+      "id": 488,
+      "name": "Odoo 19",
+      "category_id": 5,
+      "category": "Version",
+      "color": 0
+    },
+    {
+      "id": 352,
+      "name": "Odoo 16",
+      "category_id": 5,
+      "category": "Version",
+      "color": 0
+    },
+    {
+      "id": 242,
+      "name": "Odoo 15",
+      "category_id": 5,
+      "category": "Version",
+      "color": 0
+    },
+    {
+      "id": 241,
+      "name": "Odoo 14",
+      "category_id": 5,
+      "category": "Version",
+      "color": 0
+    },
+    {
+      "id": 184,
+      "name": "Odoo 13",
+      "category_id": 5,
+      "category": "Version",
+      "color": 0
+    },
+    {
+      "id": 187,
+      "name": "Odoo 12",
+      "category_id": 5,
+      "category": "Version",
+      "color": 0
+    },
+    {
+      "id": 188,
+      "name": "Odoo 11",
+      "category_id": 5,
+      "category": "Version",
+      "color": 0
+    },
+    {
+      "id": 186,
+      "name": "Odoo Community",
+      "category_id": 3,
+      "category": "Edition",
+      "color": 0
+    },
+    {
+      "id": 243,
+      "name": "Odoo Enterprise",
+      "category_id": 3,
+      "category": "Edition",
+      "color": 0
+    },
+    {
+      "id": 659,
+      "name": "1 hour",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 864,
+      "name": "3-Tier AI Agent",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 620,
+      "name": "30 Mins",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 737,
+      "name": "3D",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 676,
+      "name": "45 min",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 678,
+      "name": "AI",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 853,
+      "name": "AI Data Extraction",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 492,
+      "name": "AI Day",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 862,
+      "name": "AP Automation",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 775,
+      "name": "Academic Outreach",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 721,
+      "name": "Access rights",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 654,
+      "name": "Account Management",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 735,
+      "name": "Accounting Day",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 607,
+      "name": "Accounting Firms",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 789,
+      "name": "Accounting Partner Program",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 559,
+      "name": "Advanced level",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 777,
+      "name": "App Marketplace",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 505,
+      "name": "Appointment",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 865,
+      "name": "Asset Maintenance",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 679,
+      "name": "Attendance",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 736,
+      "name": "Augmented Reality",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 857,
+      "name": "Automated Month-End Close",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 761,
+      "name": "Automated Ordering",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 867,
+      "name": "Automated Time-to-Invoice",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 611,
+      "name": "Automation",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 613,
+      "name": "Avalara",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 514,
+      "name": "Awards",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 759,
+      "name": "B2B eCommerce",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 799,
+      "name": "BOM Automation",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 854,
+      "name": "Bank Reconciliation",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 790,
+      "name": "Batch & Production Tracking",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 801,
+      "name": "Batch Manufacturing",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 754,
+      "name": "Best Practices",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 730,
+      "name": "Best practice",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 851,
+      "name": "Billable Time & E-Signatures",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 852,
+      "name": "Bookkeeping Automation",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 509,
+      "name": "Brand",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 724,
+      "name": "Brewing",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 655,
+      "name": "Business Transformation",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 800,
+      "name": "CAD Integration",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 798,
+      "name": "CAD-to-ERP Integration",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 719,
+      "name": "CCO",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 716,
+      "name": "CEO",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 707,
+      "name": "CFO",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 837,
+      "name": "CPQ & Manufacturing",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 709,
+      "name": "CRM",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 572,
+      "name": "CRM / MKT / Ventas",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 718,
+      "name": "CSO",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 705,
+      "name": "Calendar",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 779,
+      "name": "Campus Retail",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 525,
+      "name": "CapitalG",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 751,
+      "name": "Career Growth",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 741,
+      "name": "Case Study",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 516,
+      "name": "Channel Growth",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 533,
+      "name": "Chatter",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 642,
+      "name": "Commercial",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 806,
+      "name": "Commercial Strategy",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 512,
+      "name": "Community Talk",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 628,
+      "name": "Compliance",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 748,
+      "name": "Compliance Scaling",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 536,
+      "name": "Concert",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 636,
+      "name": "Confirmed",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 520,
+      "name": "Consulting",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 566,
+      "name": "Contabilidad",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 745,
+      "name": "Conversational AI",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 758,
+      "name": "Culture",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 776,
+      "name": "Custom Development",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 652,
+      "name": "Customer Retention",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 653,
+      "name": "Customer Success",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 797,
+      "name": "Customization",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 833,
+      "name": "Cutover Planning",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 594,
+      "name": "Dashboards",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 813,
+      "name": "Data Mapping",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 717,
+      "name": "Database",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 574,
+      "name": "Desarrollo",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 743,
+      "name": "DevOps & Staging",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 825,
+      "name": "Developer Migration",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 494,
+      "name": "Developer's Forum",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 768,
+      "name": "Device Management",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 848,
+      "name": "Digital Onboarding",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 540,
+      "name": "Discuss",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 732,
+      "name": "Document",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 850,
+      "name": "Document Automation",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 734,
+      "name": "Dutch",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 858,
+      "name": "EDI Compliance",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 521,
+      "name": "ERP",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 827,
+      "name": "ERP Accessibility",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 786,
+      "name": "ERP Consolidation",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 819,
+      "name": "ERP Deployment",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 763,
+      "name": "ERP Migration",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 523,
+      "name": "ESG",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 604,
+      "name": "Ecommerce - Brick and Click",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 535,
+      "name": "Economic Development",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 666,
+      "name": "Educación",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 698,
+      "name": "Education",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 860,
+      "name": "Eliminating Vendor Bottlenecks",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 714,
+      "name": "Email marketing",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 846,
+      "name": "Employee Portal",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 727,
+      "name": "Employees",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 866,
+      "name": "End-to-End Project Tracking",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 657,
+      "name": "English",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 809,
+      "name": "Event Management",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 855,
+      "name": "Event-Driven Growth",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 680,
+      "name": "Events",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 603,
+      "name": "Events Business",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 508,
+      "name": "Expense",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 549,
+      "name": "F&B",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 491,
+      "name": "F&B Innovation Day",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 568,
+      "name": "Fabricación",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 740,
+      "name": "Fast Rollout",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 812,
+      "name": "FastTrack Methodology",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 537,
+      "name": "Feedback",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 543,
+      "name": "Field Service",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 530,
+      "name": "Financing",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 581,
+      "name": "Fleet",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 830,
+      "name": "Food Delivery",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 803,
+      "name": "Food Production Traceability",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 658,
+      "name": "French",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 836,
+      "name": "Full Traceability",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 733,
+      "name": "Future entrepreneurs",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 701,
+      "name": "Game",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 630,
+      "name": "Gamification",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 844,
+      "name": "Gated Access",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 573,
+      "name": "General",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 706,
+      "name": "Getting started",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 831,
+      "name": "Global Go-Live",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 784,
+      "name": "Global Localization",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 518,
+      "name": "Google Cloud",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 868,
+      "name": "Google Gemini",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 522,
+      "name": "Google Workspace",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 823,
+      "name": "Grant & Audit Compliance",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 538,
+      "name": "Growth",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 513,
+      "name": "HR",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 502,
+      "name": "HR Days",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 495,
+      "name": "HR Innovation Day",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 808,
+      "name": "HR Updates",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 704,
+      "name": "Hardware",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 767,
+      "name": "Hardware Integration",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 832,
+      "name": "Healthcare",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 541,
+      "name": "Helpdesk",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 552,
+      "name": "Hiring",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 731,
+      "name": "Hosting",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 702,
+      "name": "Hotel",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 824,
+      "name": "Humanitarian Logistics",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 510,
+      "name": "IA",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 649,
+      "name": "ISV",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 645,
+      "name": "ISV Integration",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 781,
+      "name": "IT Managed Services",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 815,
+      "name": "Import & Export Logistics",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 596,
+      "name": "Imports and exports",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 826,
+      "name": "Inclusive System Design",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 668,
+      "name": "Industry",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 507,
+      "name": "Influencer Talk",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 752,
+      "name": "Inspiring Journey",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 560,
+      "name": "Intermediate level",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 583,
+      "name": "Internal",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 785,
+      "name": "International Scaling",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 517,
+      "name": "Introduction",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 569,
+      "name": "Inventario",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 682,
+      "name": "Inventory",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 845,
+      "name": "Inventory Sync",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 838,
+      "name": "Inventory Traceability",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 526,
+      "name": "Investor",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 697,
+      "name": "Invoicing",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 590,
+      "name": "Iternal",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 547,
+      "name": "Jasa",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 650,
+      "name": "Key Tech Partner",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 869,
+      "name": "Key Tech Sponsor",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 591,
+      "name": "Kitchen",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 632,
+      "name": "LATAM",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 849,
+      "name": "Legal Practice",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 766,
+      "name": "Lessons Learned",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 539,
+      "name": "Live Chat",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 669,
+      "name": "Localization",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 773,
+      "name": "Logistics",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 493,
+      "name": "Logistics Day",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 554,
+      "name": "Lunch",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 635,
+      "name": "MMC",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 580,
+      "name": "MRP",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 871,
+      "name": "MVER",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 713,
+      "name": "Maintenance",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 548,
+      "name": "Manufacture",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 598,
+      "name": "Manufacturing (Food Production)",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 601,
+      "name": "Manufacturing (Robotics)",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 497,
+      "name": "Manufacturing Day",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 834,
+      "name": "Manufacturing Visibility",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 665,
+      "name": "Marketing",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 498,
+      "name": "Marketing Day",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 643,
+      "name": "Marketing Events",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 726,
+      "name": "Membership",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 608,
+      "name": "Membership businesses",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 699,
+      "name": "Migration",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 563,
+      "name": "Mini Events",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 780,
+      "name": "Modernization",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 683,
+      "name": "Mpesa",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 814,
+      "name": "Multi-Subsidiary",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 791,
+      "name": "Multichannel",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 614,
+      "name": "Multicompany",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 783,
+      "name": "Multicompany Expansion",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 615,
+      "name": "Multilocalization",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 842,
+      "name": "Native EDI",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 778,
+      "name": "NetSuite Migration",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 524,
+      "name": "Networking",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 690,
+      "name": "New Features",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 551,
+      "name": "Niaga",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 567,
+      "name": "Nivel avanzado",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 562,
+      "name": "Nivel básico",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 564,
+      "name": "Nivel intermedio",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 870,
+      "name": "No YouTube Live",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 689,
+      "name": "No-Code",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 602,
+      "name": "Non-Profits",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 822,
+      "name": "Nonprofit Accounting",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 739,
+      "name": "Odoo 20",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 621,
+      "name": "Odoo Online",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 762,
+      "name": "Odoo Operations",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 640,
+      "name": "Odoo customer",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 672,
+      "name": "Odoo partnership foundation",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 622,
+      "name": "Odoo.sh",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 624,
+      "name": "On Premise",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 738,
+      "name": "On-Site Invoicing",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 764,
+      "name": "Onboarding & Enablement",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 821,
+      "name": "Operational Efficiency",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 503,
+      "name": "Orators",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 575,
+      "name": "Otros",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 829,
+      "name": "POS",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 641,
+      "name": "Partner Customer",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 753,
+      "name": "Partner Ecosystem",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 674,
+      "name": "Partner Enablement",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 817,
+      "name": "Partner Marketing",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 625,
+      "name": "Partner Services",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 765,
+      "name": "Partner Strategy",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 579,
+      "name": "Partner talk",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 673,
+      "name": "Partners growth strategies",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 506,
+      "name": "Partnership",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 863,
+      "name": "Payout Flexibility",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 588,
+      "name": "Payroll",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 592,
+      "name": "Phone",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 840,
+      "name": "Physical AI & SME Robotics",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 818,
+      "name": "Pipeline Growth",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 545,
+      "name": "Planning",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 770,
+      "name": "Podcast",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 584,
+      "name": "Point of Sale",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 847,
+      "name": "Policy & Compliance Management",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 742,
+      "name": "PostgreSQL Optimization",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 788,
+      "name": "Procurement",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 610,
+      "name": "Product Owner",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 695,
+      "name": "Productivity",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 757,
+      "name": "Productivity Mindset",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 605,
+      "name": "Professional Services - Outdoor",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 606,
+      "name": "Professional Services IT/Indoor",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 667,
+      "name": "Programa Educativo",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 693,
+      "name": "Project",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 687,
+      "name": "Project Management",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 629,
+      "name": "Psychology",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 571,
+      "name": "Punto de Venta",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 585,
+      "name": "Purchase",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 720,
+      "name": "Quality",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 802,
+      "name": "Quality & Expiration Control",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 835,
+      "name": "Quality Control",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 646,
+      "name": "R&D",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 633,
+      "name": "RH",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 793,
+      "name": "RMA Workflows",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 634,
+      "name": "RRHH",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 811,
+      "name": "Rapid Deployment",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 684,
+      "name": "Real-Estate",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 810,
+      "name": "Real-Time Revenue",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 859,
+      "name": "Real-Time Visibility",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 839,
+      "name": "Real-World Pitfalls",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 782,
+      "name": "Reconciliation",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 528,
+      "name": "Recruitment",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 843,
+      "name": "Recurring Billing",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 577,
+      "name": "Recursos Humanos",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 553,
+      "name": "Registration",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 544,
+      "name": "Rental",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 600,
+      "name": "Rental Business",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 711,
+      "name": "Repair",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 587,
+      "name": "Replenishment",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 586,
+      "name": "Replenishmentµ",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 772,
+      "name": "Resource Planning",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 696,
+      "name": "Restaurant",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 500,
+      "name": "Restaurants Day",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 794,
+      "name": "Returns & AR",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 792,
+      "name": "Reverse Logistics",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 804,
+      "name": "Risk Reduction & Adoption",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 755,
+      "name": "Roadmap",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 841,
+      "name": "Robot Training",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 612,
+      "name": "Sales Tax",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 534,
+      "name": "San Francisco",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 582,
+      "name": "Saturday",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 749,
+      "name": "Scalable Growth",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 820,
+      "name": "Scoping & ROI",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 499,
+      "name": "Services Day",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 578,
+      "name": "Servicios",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 616,
+      "name": "Ship Station",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 795,
+      "name": "Shop Floor",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 694,
+      "name": "Sign",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 565,
+      "name": "Sitio web/E-commerce",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 609,
+      "name": "Small Shop & E-commerce",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 532,
+      "name": "Social Media",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 715,
+      "name": "Sport",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 712,
+      "name": "Spreadsheet",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 805,
+      "name": "Spreadsheets & Dashboards",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 750,
+      "name": "Standard vs. Custom",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 856,
+      "name": "Standardized Client Reporting",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 728,
+      "name": "Students",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 527,
+      "name": "Studio",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 570,
+      "name": "Studio / IA",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 519,
+      "name": "Subscription",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 677,
+      "name": "Success Story",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 816,
+      "name": "Tariff & Landed Cost Control",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 747,
+      "name": "Tax Automation",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 787,
+      "name": "Tax Compliance",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 729,
+      "name": "Teachers",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 489,
+      "name": "Technical",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 828,
+      "name": "Testing & Bug Prioritization",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 675,
+      "name": "The Powerhouse Mindset",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 771,
+      "name": "Timesheet Invoicing",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 542,
+      "name": "Timesheets",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 595,
+      "name": "Title checked (LLAR)",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 550,
+      "name": "Trading",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 769,
+      "name": "Turnkey Rollouts",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 807,
+      "name": "U.S. Payroll Localizations",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 511,
+      "name": "Update Release",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 744,
+      "name": "Upgrade",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 631,
+      "name": "User Adoption",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 861,
+      "name": "Vendor Payments",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 710,
+      "name": "Version 20",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 531,
+      "name": "Voip",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 708,
+      "name": "Webdesign",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 681,
+      "name": "Website",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 688,
+      "name": "Website Builder",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 691,
+      "name": "What's New",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 664,
+      "name": "Whats new",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 618,
+      "name": "Wholesale",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 774,
+      "name": "Wholesale & Retail Distribution",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 597,
+      "name": "Wholesale - 3rd Party",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 760,
+      "name": "Wholesale Portal",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 617,
+      "name": "Wineries & Breweries",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 599,
+      "name": "Wineries and Breweries",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 796,
+      "name": "Winery & Distillery",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 756,
+      "name": "Work-Life-Balance",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 746,
+      "name": "Workflow Automation",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 529,
+      "name": "Youtube",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 692,
+      "name": "auvan",
+      "category_id": null,
+      "category": null,
+      "color": 1
+    },
+    {
+      "id": 722,
+      "name": "community care center",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 637,
+      "name": "confiremd",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 656,
+      "name": "conformed",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 723,
+      "name": "construction",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 644,
+      "name": "content",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 504,
+      "name": "eCommerce",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 627,
+      "name": "finance",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 638,
+      "name": "friday",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 589,
+      "name": "fucntional",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 648,
+      "name": "implementation",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 593,
+      "name": "interal",
+      "category_id": null,
+      "category": null,
+      "color": 9
+    },
+    {
+      "id": 490,
+      "name": "losg",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 685,
+      "name": "mobile payment",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 626,
+      "name": "mrpµ",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 670,
+      "name": "odoo mobile",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 671,
+      "name": "odoo partnership foundation",
+      "category_id": null,
+      "category": null,
+      "color": 6
+    },
+    {
+      "id": 561,
+      "name": "ora",
+      "category_id": null,
+      "category": null,
+      "color": 5
+    },
+    {
+      "id": 647,
+      "name": "partner onboarding",
+      "category_id": null,
+      "category": null,
+      "color": 11
+    },
+    {
+      "id": 725,
+      "name": "reporting",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 501,
+      "name": "restauran",
+      "category_id": null,
+      "category": null,
+      "color": 2
+    },
+    {
+      "id": 703,
+      "name": "second hand",
+      "category_id": null,
+      "category": null,
+      "color": 3
+    },
+    {
+      "id": 700,
+      "name": "technology",
+      "category_id": null,
+      "category": null,
+      "color": 8
+    },
+    {
+      "id": 639,
+      "name": "thursday",
+      "category_id": null,
+      "category": null,
+      "color": 4
+    },
+    {
+      "id": 619,
+      "name": "title",
+      "category_id": null,
+      "category": null,
+      "color": 7
+    },
+    {
+      "id": 515,
+      "name": "whats new",
+      "category_id": null,
+      "category": null,
+      "color": 10
+    },
+    {
+      "id": 281,
+      "name": "Performance",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 364,
+      "name": "API - Connectors",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    },
+    {
+      "id": 259,
+      "name": "Transformation",
+      "category_id": null,
+      "category": null,
+      "color": 0
+    }
+  ],
+  "locations": [],
+  "speakers": [],
+  "tracks": [],
+  "exhibitors": [
+    {
+      "id": 4837,
+      "sequence": 1,
+      "name": "CipherLab | Inventory Booth",
+      "slogan": "Collaborate Best Experience for AI Digitalization",
+      "level": "Key Technology Sponsor",
+      "country": "Taiwan",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4837/image_256/256?unique=d4d9da1",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/cipherlab-inventory-booth-4837",
+      "website": "http://cipherlab.com",
+      "email": "marketing@cipherlab.com.tw",
+      "phone": "+886-2-8647-1166",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Ltd",
+      "description_text": null
+    },
+    {
+      "id": 4996,
+      "sequence": 2,
+      "name": "Ringover | CRM Booth",
+      "slogan": "AI-Powered Communication. Real Business Impact.",
+      "level": "Key Technology Sponsor",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4996/image_256/256?unique=856ae85",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/ringover-crm-booth-4996",
+      "website": "https://www.ringover.com",
+      "email": "sales-us@ringover.com",
+      "phone": null,
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Meritxell Aguilera",
+      "description_text": null
+    },
+    {
+      "id": 5466,
+      "sequence": 3,
+      "name": "Avalara | Finance Booth",
+      "slogan": "Tax compliance done right",
+      "level": "Key Technology Sponsor",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5466/image_256/256?unique=89f33aa",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/avalara-finance-booth-5466",
+      "website": "https://www.avalara.com",
+      "email": null,
+      "phone": null,
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Amanda Aontag",
+      "description_text": null
+    },
+    {
+      "id": 4895,
+      "sequence": 4,
+      "name": "Captivea | Booth: U01",
+      "slogan": "Worldwide ERP Intergrator & Business Consultant",
+      "level": "Platinum",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4895/image_256/256?unique=7f26b65",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/captivea-booth-u01-4895",
+      "website": "https://www.captivea.com",
+      "email": "contactus@captivea.com",
+      "phone": "+1 407-993-6074",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Captivea USA",
+      "description_text": null
+    },
+    {
+      "id": 5543,
+      "sequence": 5,
+      "name": "Orderful | Booth: U02",
+      "slogan": "The Fastest Way to Trade EDI with Odoo",
+      "level": "Platinum",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5543/image_256/256?unique=55c8a9d",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/orderful-booth-u02-5543",
+      "website": "/event/odoo-experience-2026-americas-10327/exhibitor/www.orderful.com",
+      "email": "sales@orderful.com",
+      "phone": null,
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Grace Sharkey",
+      "description_text": null
+    },
+    {
+      "id": 5542,
+      "sequence": 6,
+      "name": "BK Touch | Booth: P02",
+      "slogan": "Bolder > Boundless > Better Kiosks",
+      "level": "Premium",
+      "country": "Canada",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5542/image_256/256?unique=13576a8",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/bk-touch-booth-p02-5542",
+      "website": "https://www.bktouch.com",
+      "email": "info@bktouch.com",
+      "phone": "+1 778-910-6536",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "BK Touch",
+      "description_text": null
+    },
+    {
+      "id": 4900,
+      "sequence": 7,
+      "name": "Fortis | Booth: P07",
+      "slogan": "Make payments a growth engine.",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4900/image_256/256?unique=46a87e0",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/fortis-booth-p07-4900",
+      "website": "https://fortispay.com/",
+      "email": "sales@fortispay.com",
+      "phone": "(800) 761-8039",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Fortis",
+      "description_text": null
+    },
+    {
+      "id": 5499,
+      "sequence": 8,
+      "name": "ToborLife | Booth: P15",
+      "slogan": "Robotic Solutions Made Easy",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5499/image_256/256?unique=95dcd14",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/toborlife-booth-p15-5499",
+      "website": "https://toborlife.ai/",
+      "email": "sales@toborlife.ai",
+      "phone": "+1 408-409-4061",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "ToborLife",
+      "description_text": null
+    },
+    {
+      "id": 4881,
+      "sequence": 9,
+      "name": "SimplyPut | Booth: P08",
+      "slogan": "Simplify. Automate. Integrate.",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4881/image_256/256?unique=edcfb1f",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/simplyput-booth-p08-4881",
+      "website": "http://www.simplyput.com",
+      "email": "info@simplyput.com",
+      "phone": "+1 (484) 442-0436",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "SimplyPut",
+      "description_text": null
+    },
+    {
+      "id": 5414,
+      "sequence": 10,
+      "name": "Guru Technologies | Booth: P11",
+      "slogan": "Your Onshore Odoo Partner for ERP, Accounting, and Custom Software",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5414/image_256/256?unique=a5d1a2b",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/guru-technologies-booth-p11-5414",
+      "website": "http://www.gurutechnologies.net",
+      "email": "contactus@gurutechnologies.net",
+      "phone": "(801) 528-1195",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Guru Technologies",
+      "description_text": null
+    },
+    {
+      "id": 5526,
+      "sequence": 11,
+      "name": "Intrepid Software Solutions | Booth: P04",
+      "slogan": "Smart Solutions. Honest Guidance.",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5526/image_256/256?unique=039072d",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/intrepid-software-solutions-booth-p04-5526",
+      "website": "http://intrepidss.com",
+      "email": "sales@intrepidss.com",
+      "phone": "+1 (503) 683-8873",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Intrepid Software Solutions",
+      "description_text": null
+    },
+    {
+      "id": 5267,
+      "sequence": 12,
+      "name": "AAKoryx Consulting | Booth P01",
+      "slogan": "Process Led. Growth Ready.",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5267/image_256/256?unique=d97f666",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/aakoryx-consulting-booth-p01-5267",
+      "website": "https://aakoryx.com/",
+      "email": "sales@aakoryx.com",
+      "phone": "+1 (630) 402-5255",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "AAKoryx Consulting LLC",
+      "description_text": null
+    },
+    {
+      "id": 5532,
+      "sequence": 13,
+      "name": "Knowlix® | Booth: P13",
+      "slogan": "Don't manage your business. Love it.",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5532/image_256/256?unique=1686c9e",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/knowlix-booth-p13-5532",
+      "website": "https://knowlix.ai/",
+      "email": "info@knowlix.ai",
+      "phone": "+49 177 5641109",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Knowlix®",
+      "description_text": null
+    },
+    {
+      "id": 5282,
+      "sequence": 14,
+      "name": "OnSIP | Booth: P17",
+      "slogan": "OnSIP Hosted VoIP - Your Success Is Our Calling",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5282/image_256/256?unique=2a236f0",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/onsip-booth-p17-5282",
+      "website": "https://www.onsip.com/",
+      "email": "sales@onsip.com",
+      "phone": "1 (800) 801-3381",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Tonya Hottmann",
+      "description_text": null
+    },
+    {
+      "id": 4882,
+      "sequence": 15,
+      "name": "DimeSoft Business Solutions | Booth: P18",
+      "slogan": "Where business challenges find innovative solutions with Odoo",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4882/image_256/256?unique=a1cd0b1",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/dimesoft-business-solutions-booth-p18-4882",
+      "website": "https://www.dimesoftinc.com",
+      "email": "sales@dimesoftinc.com",
+      "phone": "(951) 928-1990",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Bill Dimes",
+      "description_text": null
+    },
+    {
+      "id": 5510,
+      "sequence": 16,
+      "name": "Entepri | Booth: P12",
+      "slogan": "Deploying Growth and Efficiency",
+      "level": "Premium",
+      "country": "Ecuador",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5510/image_256/256?unique=f274c21",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/entepri-booth-p12-5510",
+      "website": "https://www.entepri.com/",
+      "email": "cris@entepri.com",
+      "phone": "+593 99 903 9289",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "GAHEOS S.A.",
+      "description_text": null
+    },
+    {
+      "id": 4878,
+      "sequence": 17,
+      "name": "QOC Innovations | Booth: P19",
+      "slogan": "Experts in Manufacturing & Distribution",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4878/image_256/256?unique=83cc037",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/qoc-innovations-booth-p19-4878",
+      "website": "https://www.qocinnovations.com/",
+      "email": "info@qocinnovations.com",
+      "phone": "+1 608-218-4006",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "QOC Innovations",
+      "description_text": null
+    },
+    {
+      "id": 5498,
+      "sequence": 18,
+      "name": "MSquare Technologies | Booth: P10",
+      "slogan": "Powered by Odoo. Delivered by Experts",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5498/image_256/256?unique=8670526",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/msquare-technologies-booth-p10-5498",
+      "website": "https://www.msquaretechnology.com/",
+      "email": "odoo@msquaretechnology.com",
+      "phone": "(860)995-7906",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "MSQUARE Technologies INC",
+      "description_text": null
+    },
+    {
+      "id": 5491,
+      "sequence": 19,
+      "name": "Origami Software | Booth: P05",
+      "slogan": "Technology-based business solutions",
+      "level": "Premium",
+      "country": "Argentina",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5491/image_256/256?unique=b98f75f",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/origami-software-booth-p05-5491",
+      "website": "https://www.origami-soft.com/",
+      "email": "info@origami-soft.com",
+      "phone": "+54 9 261 417-4425",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "ORIGAMI SOFTWARE SAS",
+      "description_text": null
+    },
+    {
+      "id": 5493,
+      "sequence": 20,
+      "name": "Hibou Corp. | Booth: P09",
+      "slogan": "In the Business of Business",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5493/image_256/256?unique=9ca6b91",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/hibou-corp-booth-p09-5493",
+      "website": "https://hibou.io/",
+      "email": "hello@hibou.io",
+      "phone": "+1 206-800-7778",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Hibou Corp.",
+      "description_text": null
+    },
+    {
+      "id": 4901,
+      "sequence": 21,
+      "name": "Novobi | Booth: P06",
+      "slogan": "The Promise of Odoo. Delivered.",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4901/image_256/256?unique=b593a9a",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/novobi-booth-p06-4901",
+      "website": "https://novobi.com",
+      "email": "odoo@novobi.com",
+      "phone": "(512) 580-5667",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "David Smith",
+      "description_text": null
+    },
+    {
+      "id": 5541,
+      "sequence": 22,
+      "name": "Glorium Technologies | Booth: P14",
+      "slogan": "Glorium Technologies - Business Transformation Under One Roof",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5541/image_256/256?unique=177d4ce",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/glorium-technologies-booth-p14-5541",
+      "website": "https://gloriumtech.com/",
+      "email": "contact@gloriumtech.com",
+      "phone": "+1-888-354-0883",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Glorium Technologies",
+      "description_text": null
+    },
+    {
+      "id": 4888,
+      "sequence": 23,
+      "name": "Bista Solutions | Booth: P03",
+      "slogan": "Your Digital Transformation & Automation Partner",
+      "level": "Premium",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4888/image_256/256?unique=2d97895",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/bista-solutions-booth-p03-4888",
+      "website": "http://www.bistasolutions.com/",
+      "email": "sales@bistasolutions.com",
+      "phone": "+1 (858) 401-2332",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Bista Solutions Inc.",
+      "description_text": null
+    },
+    {
+      "id": 4892,
+      "sequence": 24,
+      "name": "QBuild Software | Booth: S15",
+      "slogan": "We Empower Your Engineers",
+      "level": "Standard",
+      "country": "Canada",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4892/image_256/256?unique=b40c5dc",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/qbuild-software-booth-s15-4892",
+      "website": "https://www.qbuildsoftware.com/cadlink/",
+      "email": "info@qbuildsoftware.com",
+      "phone": "+1 (905)479-7811",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "QBuild Software",
+      "description_text": null
+    },
+    {
+      "id": 4883,
+      "sequence": 25,
+      "name": "Aktiv Software | Booth: S13",
+      "slogan": "Making digitalization more human.",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4883/image_256/256?unique=5dd2e69",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/aktiv-software-booth-s13-4883",
+      "website": "http://aktivsoftware.com",
+      "email": "odoo@aktivsoftware.com",
+      "phone": "+1 848 219 9238",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Aktiv Software Inc",
+      "description_text": null
+    },
+    {
+      "id": 5910,
+      "sequence": 26,
+      "name": "CodeCobra",
+      "slogan": "Agents that build, connect, and run your Odoo.",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5910/image_256/256?unique=b71d88a",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/codecobra-5910",
+      "website": "https://codecobra.ai/",
+      "email": "info@codecobra.ai",
+      "phone": "+1 (718) 303-9567",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Rooteam",
+      "description_text": null
+    },
+    {
+      "id": 4887,
+      "sequence": 27,
+      "name": "Sodexis | Booth: S18",
+      "slogan": "Implementing the Odoo ERP solution with the highest return on investment possible",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4887/image_256/256?unique=1b200e5",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/sodexis-booth-s18-4887",
+      "website": "https://sodexis.com/",
+      "email": "info@sodexis.com",
+      "phone": null,
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Sodexis Team",
+      "description_text": null
+    },
+    {
+      "id": 4877,
+      "sequence": 28,
+      "name": "Smart IT | Booth: S09",
+      "slogan": null,
+      "level": "Standard",
+      "country": "Canada",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4877/image_256/256?unique=1c7b8a4",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/smart-it-booth-s09-4877",
+      "website": "/event/odoo-experience-2026-americas-10327/exhibitor/smart-ltd.ca",
+      "email": "info@smart-ltd.ca",
+      "phone": "+1 (604) 305 1616",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Jacqueline Bullen",
+      "description_text": null
+    },
+    {
+      "id": 4894,
+      "sequence": 29,
+      "name": "Kodershop | Booth: S14",
+      "slogan": "Software Professionals",
+      "level": "Standard",
+      "country": "Canada",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4894/image_256/256?unique=b2d0050",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/kodershop-booth-s14-4894",
+      "website": "https://kodershop.com",
+      "email": "info@kodershop.com",
+      "phone": "+1 (416) 885-0778",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Kodershop North America",
+      "description_text": null
+    },
+    {
+      "id": 5494,
+      "sequence": 30,
+      "name": "TekGenio | Booth: S02",
+      "slogan": "Unleash data potential",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5494/image_256/256?unique=cb2d523",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/tekgenio-booth-s02-5494",
+      "website": "https://tekgenio.com/",
+      "email": "dave.khera@tekgenio.com",
+      "phone": "(828) 203-6791",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Tekgenio",
+      "description_text": null
+    },
+    {
+      "id": 4884,
+      "sequence": 31,
+      "name": "VentorTech | Booth: S08",
+      "slogan": "Odoo partners trust our modules. Clients go live faster with them",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4884/image_256/256?unique=3f1e1f2",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/ventortech-booth-s08-4884",
+      "website": "https://ventor.tech/",
+      "email": "hello@ventor.tech",
+      "phone": "+1 305 404 28 43",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Ventor Tech US",
+      "description_text": null
+    },
+    {
+      "id": 5045,
+      "sequence": 32,
+      "name": "Navabrind IT Solutions | Booth: S04",
+      "slogan": null,
+      "level": "Standard",
+      "country": "India",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5045/image_256/256?unique=1c2185e",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/navabrind-it-solutions-booth-s04-5045",
+      "website": "https://navabrindsol.com/",
+      "email": "sales@navabrindsol.com",
+      "phone": null,
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Navabrind IT Solutions Pvt Ltd",
+      "description_text": null
+    },
+    {
+      "id": 4933,
+      "sequence": 33,
+      "name": "NexView | Booth: S12",
+      "slogan": "One View. One Operation.",
+      "level": "Standard",
+      "country": "Brazil",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4933/image_256/256?unique=1de4ab5",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/nexview-booth-s12-4933",
+      "website": "https://gonexview.com",
+      "email": "glaycon@gonexview.com",
+      "phone": "+1 (857) 615-3849",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Manoel Malafaia",
+      "description_text": null
+    },
+    {
+      "id": 5300,
+      "sequence": 34,
+      "name": "SPS Commerce | Booth: S22",
+      "slogan": "The Way to Supply Chain",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5300/image_256/256?unique=1960b6a",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/sps-commerce-booth-s22-5300",
+      "website": "https://www.spscommerce.com/products/fulfillment/integrated-fulfillment/system-integrations/odoo/",
+      "email": "kmgam@spscommerce.com",
+      "phone": "612-604-3667",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Nikki Osteraas",
+      "description_text": null
+    },
+    {
+      "id": 4879,
+      "sequence": 35,
+      "name": "Rooteam | Booth: S10, S11",
+      "slogan": "Hardworking software. Smartworking companies.",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4879/image_256/256?unique=eb5811c",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/rooteam-booth-s10-s11-4879",
+      "website": "http://rooteam.com",
+      "email": "levy@rooteam.net",
+      "phone": "7183039567",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Rooteam",
+      "description_text": null
+    },
+    {
+      "id": 4890,
+      "sequence": 36,
+      "name": "CertiPro | Booth: S17",
+      "slogan": "Expert Odoo Solutions. Delivered by CertiPro.",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4890/image_256/256?unique=7f4dead",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/certipro-booth-s17-4890",
+      "website": "https://certipro.com/",
+      "email": "info@certipro.com",
+      "phone": "323-316-9777",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Allison",
+      "description_text": null
+    },
+    {
+      "id": 5005,
+      "sequence": 37,
+      "name": "Ascetic Business Solution | Booth: S21",
+      "slogan": "Run it. Scale it. Own it: Odoo AI for growing businesses",
+      "level": "Standard",
+      "country": "India",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5005/image_256/256?unique=e0056e0",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/ascetic-business-solution-booth-s21-5005",
+      "website": "https://www.asceticbs.com/",
+      "email": "contact@asceticbs.com",
+      "phone": "+91 83200 70433",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Ascetic Business Solution LLP",
+      "description_text": null
+    },
+    {
+      "id": 4953,
+      "sequence": 38,
+      "name": "Fintech Management Limited | Booth: S19",
+      "slogan": "Solving the hardest problems of American small businesses",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4953/image_256/256?unique=7249df9",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/fintech-management-limited-booth-s19-4953",
+      "website": "https://odoo.xrpfml.com/",
+      "email": "s.winn@fintechmanagementlimited.com",
+      "phone": "(503) 729-5214",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Fintech Management Limited LLC",
+      "description_text": null
+    },
+    {
+      "id": 4880,
+      "sequence": 39,
+      "name": "Vivs Cloud | Booth: S16",
+      "slogan": "Take Odoo Further. Customize, Integrate, and Scale with Vivs Cloud",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/4880/image_256/256?unique=a6db79f",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/vivs-cloud-booth-s16-4880",
+      "website": "http://www.vivscloud.com",
+      "email": "itexperts@vivscloud.com",
+      "phone": "(650) 366-6457",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "VivsCloud Inc",
+      "description_text": null
+    },
+    {
+      "id": 5378,
+      "sequence": 40,
+      "name": "SharpSync | Booth: S01",
+      "slogan": "SharpSync: CAD-Odoo BOM link!",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5378/image_256/256?unique=9214295",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/sharpsync-booth-s01-5378",
+      "website": "https://sharpsync.net",
+      "email": "keith@cadsharp.com",
+      "phone": "570 439 5422",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Keith Rice",
+      "description_text": null
+    },
+    {
+      "id": 5477,
+      "sequence": 41,
+      "name": "Bluemax Partners | Booth: S20",
+      "slogan": "Maximizing payment processing with one click reconciliation",
+      "level": "Standard",
+      "country": "United States",
+      "logo_url": "https://odoocdn.com/web/image/event.sponsor/5477/image_256/256?unique=5a881aa",
+      "url": "https://www.odoo.com/event/odoo-experience-2026-americas-10327/exhibitor/bluemax-partners-booth-s20-5477",
+      "website": "https://www.bluemaxpartners.com",
+      "email": "jroberg@bluemaxpay",
+      "phone": "7855349782",
+      "hours": "8:00 AM – 6:00 PM",
+      "contact_name": "Jeff Roberg",
+      "description_text": null
+    }
+  ]
+}

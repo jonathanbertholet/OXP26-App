@@ -1,0 +1,667 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04E2E45C30919F78B57F435D /* VenueLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8C35F60109B412ADBC0329 /* VenueLayout.swift */; };
+		07770D93AA99C95C98AF089A /* SavedTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3795E42AC06E0CECE04FB118 /* SavedTalk.swift */; };
+		2146704E0623BBDE66E789FC /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0325FED61FC23D49F5760916 /* SavedView.swift */; };
+		22AFDD7E55AD9894661BD163 /* FloorPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CED0B6C43D2F9A6DA8E819 /* FloorPlaces.swift */; };
+		2F88B5A767BEB467D676EC61 /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BBA5F3783CDEB5CA51C3577 /* catalog.json */; };
+		3BA4D22344997ABD6D79C14B /* OXPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B65CF7606F9EBC266E3FF9 /* OXPApp.swift */; };
+		41BE220CC7B482E3D4171B61 /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0604DEB87ECDB40F4CA99C70 /* FavoritesStore.swift */; };
+		437E7F791F3E761CF8363641 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7108ED9E1DF990628585C3D1 /* ScheduleView.swift */; };
+		463526ED5DC526D6B3DC5440 /* CatalogDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78125E6338F108DCFF6369C0 /* CatalogDecoder.swift */; };
+		518C2F6721E942ECA619BC33 /* FloorMapCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EB4727A75C53DEFB57937F /* FloorMapCanvas.swift */; };
+		6A384A724758E6AE763AB5A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A70A3D6FF7C2E2391053A8A /* Assets.xcassets */; };
+		6F6F9274773642D3EE8B048E /* ConferenceClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794BCB3CCD15FD0AF6C817AE /* ConferenceClock.swift */; };
+		73D5D99FE9E4BE2BE3383D6C /* TalkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8023E6B8B158EF49B2C5FC23 /* TalkRow.swift */; };
+		93CD9470B34EEC6888C916C8 /* ExhibitorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA85E111D85B14A8F73988 /* ExhibitorListView.swift */; };
+		992FD74972B6B520B6E8B86C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A2C5F79FB548EAAFAB56C0 /* Models.swift */; };
+		9D533412DE668253E16B1FD1 /* VenueMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B215F637A3689F010F1D47 /* VenueMapView.swift */; };
+		A39BF78EFD0B964BE5CD4136 /* AgendaLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5875D2A9FA99A0D41A885E10 /* AgendaLayout.swift */; };
+		A5D148B67971DCEC7E2270E8 /* NotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0687A7A3688EE8679729BB /* NotificationDelegate.swift */; };
+		ADA685413DAC41D82181BA09 /* CatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9C1BE65C2767D69FA2261 /* CatalogTests.swift */; };
+		AEF85809D037E7A332B39238 /* TagChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F7A13FDA99FCAE9EBF2446 /* TagChip.swift */; };
+		B4A6D86D6020B116652400D3 /* AgendaGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23598901004D418C19F86DAF /* AgendaGridView.swift */; };
+		C098803DA9878E5BBAF95B57 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6635B0838B14120224A60DB4 /* RootTabView.swift */; };
+		C3938EA4A9DD95E71A80458B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 990C05972C8E9EECFE82ACBB /* PrivacyInfo.xcprivacy */; };
+		CBE35048C0E8D3CC4DB6E79E /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D55B4B9F33E94979D85BF /* TodayView.swift */; };
+		CC713146215BB647D21204C5 /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE89056316ACCBD8EF5141B /* AppLinks.swift */; };
+		D8D056C2A8306D4A7740BBA8 /* OxpTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86243825552894273487C72 /* OxpTheme.swift */; };
+		D95F8FD03B7981F3370664FE /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8663DAD70B18FED60D9CCEE /* ZoomableScrollView.swift */; };
+		DB6DF49B94C41AC1374CADD9 /* TalkReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3D925F750980474192D5F /* TalkReminders.swift */; };
+		DE5C80B4E31FB5AE043E89CE /* CatalogStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9CBE05D0AE59B7C1455BAD /* CatalogStore.swift */; };
+		E1522512917CF890CC0791EE /* AgendaTalkCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79D01AE2F757FC7C53E5629 /* AgendaTalkCard.swift */; };
+		E79A04C3B1A2BA54B565E645 /* TabRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789FBB105A28F39F02553854 /* TabRouter.swift */; };
+		EFAB2448D64081DE2E392AF3 /* EventSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F73A91E409881E50D0AE3 /* EventSwitcher.swift */; };
+		F4EADC89E99763E1513A7D6A /* Destinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8738AFD743213A4557B2EC /* Destinations.swift */; };
+		F5710AB0E5D706219BF14C8B /* TalkDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F5E4B5261269A735A0EB2B /* TalkDetailView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		31B8513E060C6D179472C468 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B50369108CE3A9A005F62E49 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5A7261B7A929E4B25F3BAD9;
+			remoteInfo = OXP;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0325FED61FC23D49F5760916 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
+		0604DEB87ECDB40F4CA99C70 /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStore.swift; sourceTree = "<group>"; };
+		15EB4727A75C53DEFB57937F /* FloorMapCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorMapCanvas.swift; sourceTree = "<group>"; };
+		1A70A3D6FF7C2E2391053A8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		21A2C5F79FB548EAAFAB56C0 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		23598901004D418C19F86DAF /* AgendaGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaGridView.swift; sourceTree = "<group>"; };
+		238F73A91E409881E50D0AE3 /* EventSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSwitcher.swift; sourceTree = "<group>"; };
+		294D55B4B9F33E94979D85BF /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		3795E42AC06E0CECE04FB118 /* SavedTalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTalk.swift; sourceTree = "<group>"; };
+		3AD9C1BE65C2767D69FA2261 /* CatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTests.swift; sourceTree = "<group>"; };
+		3BE89056316ACCBD8EF5141B /* AppLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinks.swift; sourceTree = "<group>"; };
+		47F7A13FDA99FCAE9EBF2446 /* TagChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagChip.swift; sourceTree = "<group>"; };
+		4B0687A7A3688EE8679729BB /* NotificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDelegate.swift; sourceTree = "<group>"; };
+		4BBA5F3783CDEB5CA51C3577 /* catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = catalog.json; sourceTree = "<group>"; };
+		5875D2A9FA99A0D41A885E10 /* AgendaLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaLayout.swift; sourceTree = "<group>"; };
+		5F8C35F60109B412ADBC0329 /* VenueLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueLayout.swift; sourceTree = "<group>"; };
+		6635B0838B14120224A60DB4 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		69F5E4B5261269A735A0EB2B /* TalkDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkDetailView.swift; sourceTree = "<group>"; };
+		7108ED9E1DF990628585C3D1 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		75B215F637A3689F010F1D47 /* VenueMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueMapView.swift; sourceTree = "<group>"; };
+		78125E6338F108DCFF6369C0 /* CatalogDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDecoder.swift; sourceTree = "<group>"; };
+		789FBB105A28F39F02553854 /* TabRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRouter.swift; sourceTree = "<group>"; };
+		794BCB3CCD15FD0AF6C817AE /* ConferenceClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceClock.swift; sourceTree = "<group>"; };
+		8023E6B8B158EF49B2C5FC23 /* TalkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkRow.swift; sourceTree = "<group>"; };
+		95AA85E111D85B14A8F73988 /* ExhibitorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitorListView.swift; sourceTree = "<group>"; };
+		990C05972C8E9EECFE82ACBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A2B3D925F750980474192D5F /* TalkReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkReminders.swift; sourceTree = "<group>"; };
+		A3B65CF7606F9EBC266E3FF9 /* OXPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OXPApp.swift; sourceTree = "<group>"; };
+		A79D01AE2F757FC7C53E5629 /* AgendaTalkCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaTalkCard.swift; sourceTree = "<group>"; };
+		A8264553BA42719531375463 /* OXPTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = OXPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B86243825552894273487C72 /* OxpTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OxpTheme.swift; sourceTree = "<group>"; };
+		B8663DAD70B18FED60D9CCEE /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
+		BD9CBE05D0AE59B7C1455BAD /* CatalogStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogStore.swift; sourceTree = "<group>"; };
+		DE8738AFD743213A4557B2EC /* Destinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destinations.swift; sourceTree = "<group>"; };
+		E1B84E07EEA01C8F6B0100EF /* OXP.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OXP.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7CED0B6C43D2F9A6DA8E819 /* FloorPlaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorPlaces.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1480A56AED44A5D2749F5A77 /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				78125E6338F108DCFF6369C0 /* CatalogDecoder.swift */,
+				BD9CBE05D0AE59B7C1455BAD /* CatalogStore.swift */,
+				794BCB3CCD15FD0AF6C817AE /* ConferenceClock.swift */,
+				21A2C5F79FB548EAAFAB56C0 /* Models.swift */,
+			);
+			path = Catalog;
+			sourceTree = "<group>";
+		};
+		198D9C4D5356E365979A0572 = {
+			isa = PBXGroup;
+			children = (
+				CC4C79F6A898CEAB23717727 /* OXP */,
+				ACE9DC23E0B8842020CE1937 /* OXPTests */,
+				1DB81CA52DCF298C406D3F8F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1DB81CA52DCF298C406D3F8F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1B84E07EEA01C8F6B0100EF /* OXP.app */,
+				A8264553BA42719531375463 /* OXPTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22A08D557CAE4DABCFC3B809 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				294D55B4B9F33E94979D85BF /* TodayView.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		3BECFFC13A5197ACE412E779 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				44247173644B6B16F7C4CBC5 /* Exhibitors */,
+				951D475AE1B867F6EFAC2D67 /* Map */,
+				BF959EDC062791FD2F6DDC1E /* Saved */,
+				4BE9A1009B681ABEC29A8554 /* Schedule */,
+				22A08D557CAE4DABCFC3B809 /* Today */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		44247173644B6B16F7C4CBC5 /* Exhibitors */ = {
+			isa = PBXGroup;
+			children = (
+				95AA85E111D85B14A8F73988 /* ExhibitorListView.swift */,
+			);
+			path = Exhibitors;
+			sourceTree = "<group>";
+		};
+		4518F97DBFA27ED7EC0452BD /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				4B0687A7A3688EE8679729BB /* NotificationDelegate.swift */,
+				A2B3D925F750980474192D5F /* TalkReminders.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		4BE9A1009B681ABEC29A8554 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				23598901004D418C19F86DAF /* AgendaGridView.swift */,
+				5875D2A9FA99A0D41A885E10 /* AgendaLayout.swift */,
+				A79D01AE2F757FC7C53E5629 /* AgendaTalkCard.swift */,
+				7108ED9E1DF990628585C3D1 /* ScheduleView.swift */,
+				69F5E4B5261269A735A0EB2B /* TalkDetailView.swift */,
+				8023E6B8B158EF49B2C5FC23 /* TalkRow.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		70352089C52699A5C35893BD /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				B86243825552894273487C72 /* OxpTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		951D475AE1B867F6EFAC2D67 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				15EB4727A75C53DEFB57937F /* FloorMapCanvas.swift */,
+				E7CED0B6C43D2F9A6DA8E819 /* FloorPlaces.swift */,
+				5F8C35F60109B412ADBC0329 /* VenueLayout.swift */,
+				75B215F637A3689F010F1D47 /* VenueMapView.swift */,
+				B8663DAD70B18FED60D9CCEE /* ZoomableScrollView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		A951689CEA5B5B3918D23193 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				238F73A91E409881E50D0AE3 /* EventSwitcher.swift */,
+				47F7A13FDA99FCAE9EBF2446 /* TagChip.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AB438598DB911972961016BE /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				3BE89056316ACCBD8EF5141B /* AppLinks.swift */,
+				DE8738AFD743213A4557B2EC /* Destinations.swift */,
+				789FBB105A28F39F02553854 /* TabRouter.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		ACE9DC23E0B8842020CE1937 /* OXPTests */ = {
+			isa = PBXGroup;
+			children = (
+				3AD9C1BE65C2767D69FA2261 /* CatalogTests.swift */,
+			);
+			path = OXPTests;
+			sourceTree = "<group>";
+		};
+		BF959EDC062791FD2F6DDC1E /* Saved */ = {
+			isa = PBXGroup;
+			children = (
+				0325FED61FC23D49F5760916 /* SavedView.swift */,
+			);
+			path = Saved;
+			sourceTree = "<group>";
+		};
+		CC4C79F6A898CEAB23717727 /* OXP */ = {
+			isa = PBXGroup;
+			children = (
+				1A70A3D6FF7C2E2391053A8A /* Assets.xcassets */,
+				A3B65CF7606F9EBC266E3FF9 /* OXPApp.swift */,
+				990C05972C8E9EECFE82ACBB /* PrivacyInfo.xcprivacy */,
+				6635B0838B14120224A60DB4 /* RootTabView.swift */,
+				1480A56AED44A5D2749F5A77 /* Catalog */,
+				A951689CEA5B5B3918D23193 /* Components */,
+				E5D7428AFFC84E3EC965A82D /* Favorites */,
+				3BECFFC13A5197ACE412E779 /* Features */,
+				AB438598DB911972961016BE /* Navigation */,
+				4518F97DBFA27ED7EC0452BD /* Notifications */,
+				EB60D77353F0339BC3D58467 /* Resources */,
+				70352089C52699A5C35893BD /* Theme */,
+			);
+			path = OXP;
+			sourceTree = "<group>";
+		};
+		E5D7428AFFC84E3EC965A82D /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				0604DEB87ECDB40F4CA99C70 /* FavoritesStore.swift */,
+				3795E42AC06E0CECE04FB118 /* SavedTalk.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		EB60D77353F0339BC3D58467 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4BBA5F3783CDEB5CA51C3577 /* catalog.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B5A7261B7A929E4B25F3BAD9 /* OXP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7515EC85306385CBB42AEF1C /* Build configuration list for PBXNativeTarget "OXP" */;
+			buildPhases = (
+				F1FD8404EF29F4FF3ECA5A74 /* Sources */,
+				E694D8D6F37B7405DC560314 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OXP;
+			packageProductDependencies = (
+			);
+			productName = OXP;
+			productReference = E1B84E07EEA01C8F6B0100EF /* OXP.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D71F9CF0E5416FE3D66D007F /* OXPTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B913CACF686E0D46C0A392B9 /* Build configuration list for PBXNativeTarget "OXPTests" */;
+			buildPhases = (
+				779D0DD35DB81B3460F6CB07 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2833C23E848F67171528B51A /* PBXTargetDependency */,
+			);
+			name = OXPTests;
+			packageProductDependencies = (
+			);
+			productName = OXPTests;
+			productReference = A8264553BA42719531375463 /* OXPTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B50369108CE3A9A005F62E49 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					B5A7261B7A929E4B25F3BAD9 = {
+						DevelopmentTeam = 5ML267PKP2;
+						ProvisioningStyle = Automatic;
+					};
+					D71F9CF0E5416FE3D66D007F = {
+						DevelopmentTeam = 5ML267PKP2;
+					};
+				};
+			};
+			buildConfigurationList = F619E017143B0D52FA27CFEC /* Build configuration list for PBXProject "OXP" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 198D9C4D5356E365979A0572;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1DB81CA52DCF298C406D3F8F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B5A7261B7A929E4B25F3BAD9 /* OXP */,
+				D71F9CF0E5416FE3D66D007F /* OXPTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E694D8D6F37B7405DC560314 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A384A724758E6AE763AB5A8 /* Assets.xcassets in Resources */,
+				C3938EA4A9DD95E71A80458B /* PrivacyInfo.xcprivacy in Resources */,
+				2F88B5A767BEB467D676EC61 /* catalog.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		779D0DD35DB81B3460F6CB07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADA685413DAC41D82181BA09 /* CatalogTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1FD8404EF29F4FF3ECA5A74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A6D86D6020B116652400D3 /* AgendaGridView.swift in Sources */,
+				A39BF78EFD0B964BE5CD4136 /* AgendaLayout.swift in Sources */,
+				E1522512917CF890CC0791EE /* AgendaTalkCard.swift in Sources */,
+				CC713146215BB647D21204C5 /* AppLinks.swift in Sources */,
+				463526ED5DC526D6B3DC5440 /* CatalogDecoder.swift in Sources */,
+				DE5C80B4E31FB5AE043E89CE /* CatalogStore.swift in Sources */,
+				6F6F9274773642D3EE8B048E /* ConferenceClock.swift in Sources */,
+				F4EADC89E99763E1513A7D6A /* Destinations.swift in Sources */,
+				EFAB2448D64081DE2E392AF3 /* EventSwitcher.swift in Sources */,
+				93CD9470B34EEC6888C916C8 /* ExhibitorListView.swift in Sources */,
+				41BE220CC7B482E3D4171B61 /* FavoritesStore.swift in Sources */,
+				518C2F6721E942ECA619BC33 /* FloorMapCanvas.swift in Sources */,
+				22AFDD7E55AD9894661BD163 /* FloorPlaces.swift in Sources */,
+				992FD74972B6B520B6E8B86C /* Models.swift in Sources */,
+				A5D148B67971DCEC7E2270E8 /* NotificationDelegate.swift in Sources */,
+				3BA4D22344997ABD6D79C14B /* OXPApp.swift in Sources */,
+				D8D056C2A8306D4A7740BBA8 /* OxpTheme.swift in Sources */,
+				C098803DA9878E5BBAF95B57 /* RootTabView.swift in Sources */,
+				07770D93AA99C95C98AF089A /* SavedTalk.swift in Sources */,
+				2146704E0623BBDE66E789FC /* SavedView.swift in Sources */,
+				437E7F791F3E761CF8363641 /* ScheduleView.swift in Sources */,
+				E79A04C3B1A2BA54B565E645 /* TabRouter.swift in Sources */,
+				AEF85809D037E7A332B39238 /* TagChip.swift in Sources */,
+				F5710AB0E5D706219BF14C8B /* TalkDetailView.swift in Sources */,
+				DB6DF49B94C41AC1374CADD9 /* TalkReminders.swift in Sources */,
+				73D5D99FE9E4BE2BE3383D6C /* TalkRow.swift in Sources */,
+				CBE35048C0E8D3CC4DB6E79E /* TodayView.swift in Sources */,
+				04E2E45C30919F78B57F435D /* VenueLayout.swift in Sources */,
+				9D533412DE668253E16B1FD1 /* VenueMapView.swift in Sources */,
+				D95F8FD03B7981F3370664FE /* ZoomableScrollView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2833C23E848F67171528B51A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5A7261B7A929E4B25F3BAD9 /* OXP */;
+			targetProxy = 31B8513E060C6D179472C468 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1C4895A14D97FE0B7C30237A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5ML267PKP2;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3213A8E17E7F04926573B9A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5ML267PKP2;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5B6252931AB2805B8F6C4CFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5ML267PKP2;
+				INFOPLIST_KEY_CFBundleDisplayName = OXP;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "OXP uses your location to show you on the Brussels Expo campus map.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanbertholet.oxp;
+				PRODUCT_NAME = OXP;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A072524D249BAC2E7615C2A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanbertholet.oxp.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OXP.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OXP";
+			};
+			name = Debug;
+		};
+		A6BA9D43201780CD73FEC8EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5ML267PKP2;
+				INFOPLIST_KEY_CFBundleDisplayName = OXP;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "OXP uses your location to show you on the Brussels Expo campus map.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanbertholet.oxp;
+				PRODUCT_NAME = OXP;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D3B5474144ECFB7384433795 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanbertholet.oxp.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OXP.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OXP";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7515EC85306385CBB42AEF1C /* Build configuration list for PBXNativeTarget "OXP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6BA9D43201780CD73FEC8EE /* Debug */,
+				5B6252931AB2805B8F6C4CFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B913CACF686E0D46C0A392B9 /* Build configuration list for PBXNativeTarget "OXPTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A072524D249BAC2E7615C2A1 /* Debug */,
+				D3B5474144ECFB7384433795 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F619E017143B0D52FA27CFEC /* Build configuration list for PBXProject "OXP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C4895A14D97FE0B7C30237A /* Debug */,
+				3213A8E17E7F04926573B9A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B50369108CE3A9A005F62E49 /* Project object */;
+}

@@ -37,7 +37,7 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
             coordinator?.centerContent()
         }
         // A double tap on empty floor space zooms; room buttons retain immediate taps.
-        let doubleTap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.doubleTap(_:)))
+        let doubleTap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.oxpHandleMapDoubleTap(_:)))
         doubleTap.numberOfTapsRequired = 2
         doubleTap.delegate = context.coordinator
         scroll.addGestureRecognizer(doubleTap)
@@ -123,7 +123,7 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
             return true
         }
 
-        @objc func doubleTap(_ gesture: UITapGestureRecognizer) {
+        @objc func oxpHandleMapDoubleTap(_ gesture: UITapGestureRecognizer) {
             guard let scroll, let host else { return }
             let animated = !UIAccessibility.isReduceMotionEnabled
             if scroll.zoomScale > scroll.minimumZoomScale * 1.15 {

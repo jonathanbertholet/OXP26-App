@@ -85,3 +85,7 @@ WHERE tracks_fts MATCH 'gmail CRM';
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Live agenda
+
+The app now retrieves validated agenda updates, keeps an offline copy, and preserves saved talks and reminders. See [feed/README.md](feed/README.md) for the schedule, source validation, and deployment instructions.

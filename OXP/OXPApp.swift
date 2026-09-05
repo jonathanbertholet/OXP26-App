@@ -59,6 +59,7 @@ struct OXPApp: App {
                        let id = Int(raw.dropFirst("-openTrack=".count)) {
                         router.openTrack(id, on: .today)
                     }
+                    await catalog.refresh()
                     await clock.startTicking()
                 }
                 .preferredColorScheme(.none)

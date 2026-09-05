@@ -3,6 +3,11 @@ import Foundation
 @MainActor
 @Observable
 final class CatalogStore {
+    private let feed = CatalogFeedClient()
+    private(set) var isRefreshing = false
+    private(set) var lastCheckedAt: Date?
+    private(set) var refreshError: String?
+    private var lastAttempt: Date?
     private(set) var bundle: CatalogBundle?
     private(set) var payload: CatalogPayload?
     private(set) var loadError: String?
@@ -18,7 +23,7 @@ final class CatalogStore {
     private let selectedEventKey = "oxp.selectedEventID"
 
     var event: EventInfo? { payload?.event }
-    var tracks: [Track] { payload?.tracks ?? [] }
+    var tracks: [Track] { (payload?.tracks ?? []).filter { !$0.isUnavailable } }
     var exhibitors: [Exhibitor] { payload?.exhibitors ?? [] }
     var locations: [String] { payload?.locations ?? [] }
     var availableEvents: [EventInfo] {
@@ -38,19 +43,44 @@ final class CatalogStore {
                 try CatalogDecoder.loadBundled()
             }.value
             apply(bundle: loaded)
+            if let cached = await feed.restore(comparedTo: loaded) {
+                apply(bundle: cached.bundle)
+                lastCheckedAt = cached.checkedAt
+            }
         } catch {
             loadError = error.localizedDescription
         }
     }
 
+    func refresh(force: Bool = false) async {
+        guard let baseline = bundle, !isRefreshing else { return }
+        if !force, let lastAttempt, Date.now.timeIntervalSince(lastAttempt) < 300 { return }
+        isRefreshing = true
+        lastAttempt = .now
+        defer { isRefreshing = false }
+        do {
+            let result = try await feed.refresh(comparedTo: baseline)
+            apply(bundle: result.bundle)
+            lastCheckedAt = result.checkedAt
+            refreshError = nil
+        } catch is CancellationError {
+            // Leaving the foreground keeps the current agenda.
+        } catch {
+            refreshError = "Couldn’t check for updates. Your offline agenda is still available."
+        }
+    }
+
     func apply(bundle: CatalogBundle, persist: Bool = true) {
+        guard !bundle.events.isEmpty else { return }
+        let currentSelection = self.bundle == nil ? nil : selectedEventID
         self.bundle = bundle
         allTracksByID = Dictionary(
             bundle.events.flatMap(\.tracks).map { ($0.id, $0) },
             uniquingKeysWith: { first, _ in first }
         )
         let stored = UserDefaults.standard.object(forKey: selectedEventKey) as? Int
-        let initial = stored.flatMap { id in bundle.events.contains { $0.event.id == id } ? id : nil }
+        let preferred = currentSelection ?? stored
+        let initial = preferred.flatMap { id in bundle.events.contains { $0.event.id == id } ? id : nil }
             ?? bundle.defaultEventID
             ?? 9099
         selectEvent(initial, persist: persist)
@@ -75,7 +105,7 @@ final class CatalogStore {
         self.payload = payload
         tracksByID = Dictionary(payload.tracks.map { ($0.id, $0) }, uniquingKeysWith: { _, last in last })
         exhibitorsByID = Dictionary(payload.exhibitors.map { ($0.id, $0) }, uniquingKeysWith: { _, last in last })
-        days = Array(Set(payload.tracks.compactMap(\.day))).sorted()
+        days = Array(Set(tracks.compactMap(\.day))).sorted()
         let uniqueTopics = Dictionary(grouping: payload.tracks.flatMap(\.topicTags), by: \.id)
         topicTags = uniqueTopics.values.compactMap(\.first).sorted { $0.name < $1.name }
         let uniqueAudience = Dictionary(grouping: payload.tracks.flatMap(\.audienceTags), by: \.id)

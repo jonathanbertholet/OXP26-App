@@ -24,6 +24,7 @@ struct TodayView: View {
                 }
                 .padding(.bottom, 32)
             }
+            .refreshable { await catalog.refresh(force: true) }
             .oxpBackground()
             .navigationTitle("Today")
             .oxpPreviewStatus()

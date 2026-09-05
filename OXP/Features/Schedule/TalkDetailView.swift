@@ -15,6 +15,10 @@ struct TalkDetailView: View {
             if let track {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
+                        if track.isUnavailable {
+                            Label("This talk is no longer listed in the official agenda. Your saved copy is kept here; its reminder is turned off.", systemImage: "calendar.badge.exclamationmark")
+                                .foregroundStyle(.secondary)
+                        }
                         header(track)
                         speakerBlock(track)
                         if let description = track.descriptionText, !description.isEmpty {

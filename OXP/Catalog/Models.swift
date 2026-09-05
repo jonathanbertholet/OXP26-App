@@ -103,6 +103,8 @@ struct Track: Identifiable, Codable, Hashable, Sendable {
     var descriptionText: String?
     var imageURL: URL?
     var comingSoon: Bool
+    var unavailable: Bool? = nil
+    var isUnavailable: Bool { unavailable == true }
     var tagIDs: [Int]
     var speakerIDs: [Int]
     var tags: [Tag]
@@ -120,6 +122,7 @@ struct Track: Identifiable, Codable, Hashable, Sendable {
         case speakerLine = "speaker_line"
         case descriptionText = "description_text"
         case imageURL = "image_url"
+        case unavailable
         case comingSoon = "coming_soon"
         case tagIDs = "tag_ids"
         case speakerIDs = "speaker_ids"
@@ -237,6 +240,7 @@ struct EventInfo: Codable, Hashable, Identifiable, Sendable {
     var exhibitorsURL: URL?
     var startsOn: String?
     var endsOn: String?
+    var sourceCheckedAt: Date? = nil
 
     enum CodingKeys: String, CodingKey {
         case id, code, name, slug, timezone
@@ -251,6 +255,7 @@ struct EventInfo: Codable, Hashable, Identifiable, Sendable {
         case exhibitorsURL = "exhibitors_url"
         case startsOn = "starts_on"
         case endsOn = "ends_on"
+        case sourceCheckedAt = "source_checked_at"
     }
 
     var shortName: String { shortNameValue ?? name }
@@ -317,9 +322,13 @@ struct CatalogPayload: Codable, Sendable {
 struct CatalogBundle: Codable, Sendable {
     var defaultEventID: Int?
     var events: [CatalogPayload]
+    var schemaVersion: Int? = nil
+    var generatedAt: Date? = nil
 
     enum CodingKeys: String, CodingKey {
         case events
+        case schemaVersion = "schema_version"
+        case generatedAt = "generated_at"
         case defaultEventID = "default_event_id"
     }
 

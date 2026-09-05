@@ -65,6 +65,10 @@ struct TalkRow: View {
                             .accessibilityLabel("Saved")
                     }
                 }
+                if track.isUnavailable {
+                    Label("No longer listed", systemImage: "calendar.badge.exclamationmark")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
                 TalkTagStrip(track: track, compact: true)
             }
             if !dynamicTypeSize.isAccessibilitySize {

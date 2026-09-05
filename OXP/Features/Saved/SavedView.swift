@@ -69,6 +69,7 @@ struct SavedView: View {
                 }
             }
             .scrollContentBackground(.hidden)
+            .refreshable { await catalog.refresh(force: true) }
             .oxpBackground()
             .navigationTitle("Saved")
             .oxpPreviewStatus()

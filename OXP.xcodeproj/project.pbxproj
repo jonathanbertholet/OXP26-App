@@ -15,7 +15,9 @@
 		3BA4D22344997ABD6D79C14B /* OXPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B65CF7606F9EBC266E3FF9 /* OXPApp.swift */; };
 		41BE220CC7B482E3D4171B61 /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0604DEB87ECDB40F4CA99C70 /* FavoritesStore.swift */; };
 		437E7F791F3E761CF8363641 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7108ED9E1DF990628585C3D1 /* ScheduleView.swift */; };
+		44AB06F8E4970A9895B19566 /* CatalogFeedClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCEA58129350939B451724D /* CatalogFeedClient.swift */; };
 		463526ED5DC526D6B3DC5440 /* CatalogDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78125E6338F108DCFF6369C0 /* CatalogDecoder.swift */; };
+		4BEEDC4674BE637D815975CC /* CatalogFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A0E5E8D479A1BB990957A2 /* CatalogFeedTests.swift */; };
 		518C2F6721E942ECA619BC33 /* FloorMapCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EB4727A75C53DEFB57937F /* FloorMapCanvas.swift */; };
 		6A384A724758E6AE763AB5A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A70A3D6FF7C2E2391053A8A /* Assets.xcassets */; };
 		6F6F9274773642D3EE8B048E /* ConferenceClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794BCB3CCD15FD0AF6C817AE /* ConferenceClock.swift */; };
@@ -77,9 +79,11 @@
 		78125E6338F108DCFF6369C0 /* CatalogDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDecoder.swift; sourceTree = "<group>"; };
 		789FBB105A28F39F02553854 /* TabRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRouter.swift; sourceTree = "<group>"; };
 		794BCB3CCD15FD0AF6C817AE /* ConferenceClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceClock.swift; sourceTree = "<group>"; };
+		7BCEA58129350939B451724D /* CatalogFeedClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogFeedClient.swift; sourceTree = "<group>"; };
 		8023E6B8B158EF49B2C5FC23 /* TalkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkRow.swift; sourceTree = "<group>"; };
 		95AA85E111D85B14A8F73988 /* ExhibitorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitorListView.swift; sourceTree = "<group>"; };
 		990C05972C8E9EECFE82ACBB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		99A0E5E8D479A1BB990957A2 /* CatalogFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogFeedTests.swift; sourceTree = "<group>"; };
 		A2B3D925F750980474192D5F /* TalkReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkReminders.swift; sourceTree = "<group>"; };
 		A3B65CF7606F9EBC266E3FF9 /* OXPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OXPApp.swift; sourceTree = "<group>"; };
 		A79D01AE2F757FC7C53E5629 /* AgendaTalkCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaTalkCard.swift; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				78125E6338F108DCFF6369C0 /* CatalogDecoder.swift */,
+				7BCEA58129350939B451724D /* CatalogFeedClient.swift */,
 				BD9CBE05D0AE59B7C1455BAD /* CatalogStore.swift */,
 				794BCB3CCD15FD0AF6C817AE /* ConferenceClock.swift */,
 				21A2C5F79FB548EAAFAB56C0 /* Models.swift */,
@@ -214,6 +219,7 @@
 		ACE9DC23E0B8842020CE1937 /* OXPTests */ = {
 			isa = PBXGroup;
 			children = (
+				99A0E5E8D479A1BB990957A2 /* CatalogFeedTests.swift */,
 				3AD9C1BE65C2767D69FA2261 /* CatalogTests.swift */,
 			);
 			path = OXPTests;
@@ -358,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BEEDC4674BE637D815975CC /* CatalogFeedTests.swift in Sources */,
 				ADA685413DAC41D82181BA09 /* CatalogTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +378,7 @@
 				E1522512917CF890CC0791EE /* AgendaTalkCard.swift in Sources */,
 				CC713146215BB647D21204C5 /* AppLinks.swift in Sources */,
 				463526ED5DC526D6B3DC5440 /* CatalogDecoder.swift in Sources */,
+				44AB06F8E4970A9895B19566 /* CatalogFeedClient.swift in Sources */,
 				DE5C80B4E31FB5AE043E89CE /* CatalogStore.swift in Sources */,
 				6F6F9274773642D3EE8B048E /* ConferenceClock.swift in Sources */,
 				F4EADC89E99763E1513A7D6A /* Destinations.swift in Sources */,

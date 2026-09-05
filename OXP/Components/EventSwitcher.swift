@@ -19,6 +19,19 @@ struct EventSwitcher: View {
                         }
                     }
                 }
+                Divider()
+                if let checked = catalog.event?.sourceCheckedAt {
+                    Text("Odoo checked \(checked.formatted(date: .abbreviated, time: .shortened))")
+                } else {
+                    Text("Using the included agenda")
+                }
+                if let error = catalog.refreshError { Text(error) }
+                Button {
+                    Task { await catalog.refresh(force: true) }
+                } label: {
+                    Label(catalog.isRefreshing ? "Checking for updates…" : "Refresh agenda", systemImage: "arrow.clockwise")
+                }
+                .disabled(catalog.isRefreshing)
             } label: {
                 Label(catalog.event?.shortName ?? "Event", systemImage: "globe")
             }

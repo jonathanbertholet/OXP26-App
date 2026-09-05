@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct RootTabView: View {
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(FavoritesStore.self) private var favorites
     @Environment(CatalogStore.self) private var catalog
     @Environment(TabRouter.self) private var router
 
@@ -26,6 +28,16 @@ struct RootTabView: View {
             }
         }
         .tint(OxpTheme.accentInk)
+        .task(id: scenePhase) {
+            guard scenePhase == .active else { return }
+            while !Task.isCancelled {
+                await catalog.refresh()
+                try? await Task.sleep(for: .seconds(300))
+            }
+        }
+        .onChange(of: catalog.bundle?.generatedAt) {
+            Task { await favorites.rescheduleAll(using: catalog, requestPermission: false) }
+        }
         .overlay {
             if catalog.payload == nil, catalog.loadError == nil {
                 ProgressView("Loading Odoo Experience…")

@@ -52,6 +52,7 @@ struct ScheduleView: View {
                     scheduleList
                 }
             }
+            .refreshable { await catalog.refresh(force: true) }
             .oxpBackground()
             .navigationTitle("Schedule")
             .oxpPreviewStatus()

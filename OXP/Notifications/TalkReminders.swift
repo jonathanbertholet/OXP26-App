@@ -30,12 +30,17 @@ enum TalkReminders {
         }
     }
 
-    static func schedule(track: Track, minutesBefore: Int) async {
-        guard let startsAt = track.startsAt else { return }
+    static func schedule(track: Track, minutesBefore: Int, requestPermission: Bool = true) async {
+        guard !track.isUnavailable, let startsAt = track.startsAt else { return }
         let fire = startsAt.addingTimeInterval(TimeInterval(-minutesBefore * 60))
         guard fire > .now else { return }
 
-        guard await requestAccess() else { return }
+        if requestPermission {
+            guard await requestAccess() else { return }
+        } else {
+            let settings = await UNUserNotificationCenter.current().notificationSettings()
+            guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
+        }
 
         let content = UNMutableNotificationContent()
         content.title = track.name
@@ -47,8 +52,10 @@ enum TalkReminders {
         content.userInfo = ["trackId": track.id]
         content.interruptionLevel = .timeSensitive
 
-        let components = Calendar.current.dateComponents(
-            [.year, .month, .day, .hour, .minute],
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .gmt
+        let components = calendar.dateComponents(
+            [.timeZone, .year, .month, .day, .hour, .minute],
             from: fire
         )
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)

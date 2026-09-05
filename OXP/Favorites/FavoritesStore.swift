@@ -56,7 +56,7 @@ final class FavoritesStore {
     }
 
     func savedTracks(in catalog: CatalogStore) -> [Track] {
-        catalog.tracks
+        (catalog.payload?.tracks ?? [])
             .filter { savedIDs.contains($0.id) }
             .sorted { ($0.startsAt ?? .distantFuture) < ($1.startsAt ?? .distantFuture) }
     }
@@ -66,10 +66,17 @@ final class FavoritesStore {
             .sorted { ($0.startsAt ?? .distantFuture) < ($1.startsAt ?? .distantFuture) }
     }
 
-    func rescheduleAll(using catalog: CatalogStore) async {
-        TalkReminders.cancelAll()
-        for track in allSavedTracks(in: catalog) {
-            await TalkReminders.schedule(track: track, minutesBefore: remindMinutesBefore)
+    func rescheduleAll(using catalog: CatalogStore, requestPermission: Bool = true) async {
+        if requestPermission { _ = await TalkReminders.requestAccess() }
+        let tracks = allSavedTracks(in: catalog).filter {
+            !$0.isUnavailable && ($0.startsAt?.addingTimeInterval(TimeInterval(-remindMinutesBefore * 60)) ?? .distantPast) > .now
+        }.prefix(64)
+        let wanted = Set(tracks.map { TalkReminders.identifier(for: $0.id) })
+        let center = UNUserNotificationCenter.current()
+        let pending = await center.pendingNotificationRequests()
+        center.removePendingNotificationRequests(withIdentifiers: pending.map(\.identifier).filter { $0.hasPrefix("oxp.talk.") && !wanted.contains($0) })
+        for track in tracks {
+            await TalkReminders.schedule(track: track, minutesBefore: remindMinutesBefore, requestPermission: false)
         }
     }
 

@@ -8,7 +8,10 @@ export default {
       const headers = new Headers();
       const etag = request.headers.get('If-None-Match');
       if (etag) headers.set('If-None-Match', etag);
-      const response = await fetch(upstream, {headers, cf: {cacheTtlByStatus: {'200-299': 60, '400-599': 0}}});
+      // Bound GitHub CDN staleness as well as the Worker cache to one minute.
+      const source = new URL(upstream);
+      source.searchParams.set('minute', String(Math.floor(Date.now() / 60_000)));
+      const response = await fetch(source.toString(), {headers, cf: {cacheTtlByStatus: {'200-299': 60, '400-599': 0}}});
       if (response.status !== 200 && response.status !== 304) throw new Error(`Upstream ${response.status}`);
       const outgoing = new Headers({'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=60, must-revalidate', 'X-Content-Type-Options': 'nosniff'});
       if (response.headers.has('etag')) outgoing.set('ETag', response.headers.get('etag'));

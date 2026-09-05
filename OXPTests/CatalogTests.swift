@@ -129,3 +129,66 @@ struct VenueLayoutTests {
         #expect(roomHit?.ref == "Hall 6.A")
     }
 }
+
+
+struct FloorPresentationTests {
+    @Test func wideHallsUsePortraitSpaceWithoutStretching() {
+        for plan in [FloorPlan.hall6, .hall7] {
+            let portrait = FloorPresentation(plan: plan, viewport: CGSize(width: 390, height: 600))
+            #expect(portrait.rotated)
+            #expect(abs(portrait.size.width / portrait.size.height - 1 / plan.aspect) < 0.001)
+            #expect(portrait.size.height == 576)
+            let landscape = FloorPresentation(plan: plan, viewport: CGSize(width: 900, height: 500))
+            #expect(!landscape.rotated)
+            #expect(abs(landscape.size.width / landscape.size.height - plan.aspect) < 0.001)
+        }
+    }
+
+    @Test func roomFocusAndArtworkShareRotatedCoordinates() {
+        let presentation = FloorPresentation(plan: .hall6, viewport: CGSize(width: 390, height: 600))
+        let topLeft = presentation.normalized(CGRect(x: 0, y: 0, width: 0.2, height: 0.3))
+        #expect(abs(topLeft.minX - 0.7) < 0.001)
+        #expect(topLeft.minY == 0)
+        #expect(topLeft.width == 0.3)
+        #expect(topLeft.height == 0.2)
+        for feature in VenueLayout.features(on: .hall6) {
+            let frame = presentation.frame(feature.frame)
+            #expect(frame.minX >= 0 && frame.minY >= 0)
+            #expect(frame.maxX <= presentation.size.width + 0.01)
+            #expect(frame.maxY <= presentation.size.height + 0.01)
+        }
+    }
+
+    @Test func tallPlansAndOverviewKeepTheirProportionsAcrossWindowSizes() {
+        for viewport in [CGSize(width: 320, height: 480), CGSize(width: 1024, height: 700), .zero] {
+            for plan in [FloorPlan.overview, .hall10, .hall11] {
+                let layout = FloorPresentation(plan: plan, viewport: viewport)
+                #expect(!layout.rotated)
+                #expect(layout.size.width > 0 && layout.size.height > 0)
+                #expect(abs(layout.size.width / layout.size.height - plan.aspect) < 0.001)
+                #expect(layout.size.width <= max(viewport.width - 24, 1))
+                #expect(layout.size.height <= max(viewport.height - 24, 1) + 0.001)
+            }
+        }
+    }
+}
+
+
+struct MapNavigationTests {
+    @Test @MainActor func showOnMapRevealsTheMapInsteadOfPushingAnotherDetail() {
+        let router = TabRouter()
+        router.mapPath = [.room("Hall 7.A")]
+        router.highlightedExhibitorID = 42
+        router.openRoom("Hall 6.A")
+        #expect(router.tab == .map)
+        #expect(router.mapPath.isEmpty)
+        #expect(router.selectedFloor == .hall6)
+        #expect(router.selectedRoom == "Hall 6.A")
+        #expect(router.highlightedExhibitorID == nil)
+        router.mapPath = [.room("Hall 6.A")]
+        router.showOnMap(plan: .hall7, exhibitorID: 42)
+        #expect(router.mapPath.isEmpty)
+        #expect(router.selectedRoom == nil)
+        #expect(router.highlightedExhibitorID == 42)
+    }
+}

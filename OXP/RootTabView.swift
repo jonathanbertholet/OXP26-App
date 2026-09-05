@@ -25,7 +25,7 @@ struct RootTabView: View {
                 SavedView()
             }
         }
-        .tint(OxpTheme.accent)
+        .tint(OxpTheme.accentInk)
         .overlay {
             if catalog.payload == nil, catalog.loadError == nil {
                 ProgressView("Loading Odoo Experience…")

@@ -19,6 +19,7 @@ struct ScheduleView: View {
     @Environment(FavoritesStore.self) private var favorites
     @Environment(TabRouter.self) private var router
     @Environment(ConferenceClock.self) private var clock
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     @AppStorage("oxp.scheduleLayout") private var layoutMode: ScheduleLayout = .list
     @State private var selectedDay: String = ""
@@ -51,7 +52,9 @@ struct ScheduleView: View {
                     scheduleList
                 }
             }
-            .navigationTitle("")
+            .oxpBackground()
+            .navigationTitle("Schedule")
+            .oxpPreviewStatus()
             .navigationBarTitleDisplayMode(.inline)
             .toolbarTitleDisplayMode(.inline)
             .toolbar {
@@ -62,8 +65,7 @@ struct ScheduleView: View {
             .navigationDestination(for: AppRoute.self) { Destinations.view(for: $0) }
             .searchable(text: $query, prompt: "Talks, speakers, rooms")
             .searchToolbarBehavior(.minimize)
-            .safeAreaPadding(.bottom, 58)
-            .overlay(alignment: .bottom) {
+            .safeAreaInset(edge: .bottom, spacing: 0) {
                 ScheduleModeBar(
                     layoutMode: $layoutMode,
                     emphasizeSaved: $emphasizeSaved,
@@ -82,6 +84,11 @@ struct ScheduleView: View {
                     } else {
                         selectedDay = suggestedDay
                     }
+                }
+            }
+            .onChange(of: catalog.days) { _, days in
+                if !days.contains(selectedDay) {
+                    selectedDay = suggestedDay
                 }
             }
             .onChange(of: catalog.selectedEventID) {
@@ -105,9 +112,23 @@ struct ScheduleView: View {
             }
         }
         .listStyle(.plain)
+        .scrollContentBackground(.hidden)
         .overlay {
             if groupedSlots.isEmpty {
-                ContentUnavailableView.search(text: query)
+                ContentUnavailableView {
+                    Label("No matching talks", systemImage: "calendar.badge.exclamationmark")
+                } description: {
+                    Text("Try another day or clear your search and filters.")
+                } actions: {
+                    Button("Clear filters") {
+                        query = ""
+                        kindFilter = nil
+                        tagID = nil
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(OxpTheme.accent)
+                    .controlSize(.large)
+                }
             }
         }
     }
@@ -122,27 +143,44 @@ struct ScheduleView: View {
 
     private var dayStrip: some View {
         HStack(spacing: 8) {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(catalog.days, id: \.self) { day in
-                        let selected = day == selectedDay
-                        Button {
-                            withAnimation(.snappy) { selectedDay = day }
-                        } label: {
-                            VStack(spacing: 2) {
-                                Text(weekday(day))
-                                    .font(.caption.weight(.semibold))
-                                Text(Self.shortDay(day))
-                                    .font(.headline)
-                            }
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .foregroundStyle(selected ? Color.white : .primary)
-                            .background(selected ? OxpTheme.accent : Color.secondary.opacity(0.12), in: Capsule())
+            if dynamicTypeSize.isAccessibilitySize {
+                Menu {
+                    Picker("Conference day", selection: $selectedDay) {
+                        ForEach(catalog.days, id: \.self) { day in
+                            Text("\(weekday(day)) \(day)").tag(day)
                         }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("\(weekday(day)) \(day)")
-                        .accessibilityAddTraits(selected ? .isSelected : [])
+                    }
+                } label: {
+                    Label(selectedDay.isEmpty ? "Day" : "\(weekday(selectedDay)) \(Self.shortDay(selectedDay))",
+                          systemImage: "calendar")
+                        .font(.headline)
+                        .frame(minHeight: 44)
+                }
+                .buttonStyle(.bordered)
+                Spacer(minLength: 0)
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(catalog.days, id: \.self) { day in
+                            let selected = day == selectedDay
+                            Button {
+                                withAnimation(.snappy) { selectedDay = day }
+                            } label: {
+                                VStack(spacing: 2) {
+                                    Text(weekday(day))
+                                        .font(.caption.weight(.semibold))
+                                    Text(Self.shortDay(day))
+                                        .font(.headline)
+                                }
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 8)
+                                .foregroundStyle(selected ? Color.white : .primary)
+                                .background(selected ? OxpTheme.accent : Color.secondary.opacity(0.12), in: Capsule())
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel("\(weekday(day)) \(day)")
+                            .accessibilityAddTraits(selected ? .isSelected : [])
+                        }
                     }
                 }
             }
@@ -170,7 +208,7 @@ struct ScheduleView: View {
         return Button {
             withAnimation(.snappy) { kindFilter = kind }
         } label: {
-            TagChip(text: title, selected: selected)
+            FilterChip(title: title, selected: selected)
         }
         .buttonStyle(.plain)
     }
@@ -216,6 +254,7 @@ struct ScheduleView: View {
 /// Compact tag picker parked beside the day chips.
 private struct ScheduleTagFilter: View {
     @Environment(CatalogStore.self) private var catalog
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Binding var tagID: Int?
 
     var body: some View {
@@ -236,12 +275,13 @@ private struct ScheduleTagFilter: View {
         } label: {
             HStack(spacing: 5) {
                 Image(systemName: "line.3.horizontal.decrease")
-                Text(label)
-                    .lineLimit(1)
+                if !dynamicTypeSize.isAccessibilitySize {
+                    Text(label).lineLimit(1)
+                }
             }
             .font(.subheadline.weight(.semibold))
             .padding(.horizontal, 12)
-            .padding(.vertical, 10)
+            .frame(minHeight: 44)
             .foregroundStyle(tagID == nil ? Color.primary : Color.white)
             .background(tagID == nil ? Color.secondary.opacity(0.12) : OxpTheme.accent, in: Capsule())
             .frame(maxWidth: 132)
@@ -267,47 +307,55 @@ private struct ScheduleModeBar: View {
     var onJumpToNow: () -> Void
 
     var body: some View {
-        GlassEffectContainer(spacing: 10) {
-            HStack(spacing: 10) {
-                HStack(spacing: 0) {
-                    ForEach(ScheduleLayout.allCases) { mode in
-                        Button(mode.title) {
-                            withAnimation(.snappy) { layoutMode = mode }
-                        }
-                        .font(.subheadline.weight(.semibold))
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 8)
-                        .foregroundStyle(layoutMode == mode ? Color.white : .primary)
-                        .background(layoutMode == mode ? OxpTheme.accent : Color.clear, in: Capsule())
-                    }
-                }
-                .padding(4)
-                .glassEffect(.regular.interactive(), in: Capsule())
-                .accessibilityElement(children: .contain)
-                .accessibilityHint("Agenda is a room-by-time grid. List groups talks that start together.")
-
-                if savedCount > 0, layoutMode == .agenda {
-                    Button {
-                        withAnimation(.snappy) { emphasizeSaved.toggle() }
-                    } label: {
-                        Image(systemName: emphasizeSaved ? "heart.fill" : "heart")
-                            .frame(width: 36, height: 36)
-                    }
-                    .buttonStyle(.glass)
-                    .tint(emphasizeSaved ? .pink : OxpTheme.accent)
-                    .accessibilityLabel(emphasizeSaved ? "Show every talk" : "Highlight saved talks")
-                }
-
-                if showNow {
-                    Button("Now", systemImage: "circle.inset.filled", action: onJumpToNow)
-                        .labelStyle(.iconOnly)
-                        .frame(width: 36, height: 36)
-                        .buttonStyle(.glass)
-                        .tint(.red)
-                        .accessibilityLabel("Jump to the current time")
-                }
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 12) {
+                modePicker
+                actions
+            }
+            VStack(spacing: 8) {
+                modePicker
+                actions
             }
         }
-        .padding(.bottom, 6)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(.bar)
+    }
+
+    private var modePicker: some View {
+        Picker("Schedule layout", selection: $layoutMode) {
+            ForEach(ScheduleLayout.allCases) { mode in
+                Text(mode.title).tag(mode)
+            }
+        }
+        .pickerStyle(.segmented)
+        .frame(minWidth: 180, maxWidth: 320)
+    }
+
+    private var actions: some View {
+        HStack(spacing: 8) {
+            if savedCount > 0, layoutMode == .agenda {
+                Button {
+                    withAnimation(.snappy) { emphasizeSaved.toggle() }
+                } label: {
+                    Image(systemName: emphasizeSaved ? "heart.fill" : "heart")
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.bordered)
+                .tint(emphasizeSaved ? .pink : OxpTheme.accent)
+                .accessibilityLabel(emphasizeSaved ? "Show every talk" : "Highlight saved talks")
+                .accessibilityAddTraits(emphasizeSaved ? .isSelected : [])
+            }
+            if showNow {
+                Button(action: onJumpToNow) {
+                    Image(systemName: "clock")
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.bordered)
+                .accessibilityLabel("Jump to the current time")
+            }
+        }
     }
 }

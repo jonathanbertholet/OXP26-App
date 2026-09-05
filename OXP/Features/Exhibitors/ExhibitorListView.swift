@@ -9,22 +9,33 @@ struct ExhibitorListView: View {
     var body: some View {
         NavigationStack(path: Bindable(router).expoPath) {
             List {
+                if !filtered.isEmpty {
+                    OxpPageIntro(
+                        title: "Meet the community",
+                        subtitle: "\(filtered.count) \(startupsOnly ? "startups" : "partners and startups") to discover",
+                        symbol: "building.2"
+                    )
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                }
                 ForEach(filtered) { exhibitor in
                     NavigationLink(value: AppRoute.exhibitor(exhibitor.id)) {
                         ExhibitorRow(exhibitor: exhibitor)
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .oxpBackground()
             .navigationTitle("Expo")
+            .oxpPreviewStatus()
             .searchable(text: $query, prompt: "Partners and startups")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     EventSwitcher()
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Toggle("Startups", isOn: $startupsOnly)
-                        .toggleStyle(.switch)
-                        .labelsHidden()
+                    Toggle("Startups", systemImage: "sparkles", isOn: $startupsOnly)
+                        .toggleStyle(.button)
                         .accessibilityLabel("Show startups only")
                 }
             }
@@ -35,7 +46,24 @@ struct ExhibitorListView: View {
             }
             .overlay {
                 if filtered.isEmpty {
-                    ContentUnavailableView.search(text: query)
+                    ContentUnavailableView {
+                        Label(catalog.exhibitors.isEmpty ? "Exhibitors coming soon" : "No exhibitors found",
+                              systemImage: "building.2")
+                    } description: {
+                        Text(catalog.exhibitors.isEmpty
+                             ? "This edition’s exhibitor directory isn’t available yet."
+                             : "Try another name or show all exhibitors.")
+                    } actions: {
+                        if !catalog.exhibitors.isEmpty {
+                            Button("Show all exhibitors") {
+                                query = ""
+                                startupsOnly = false
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(OxpTheme.accent)
+                            .controlSize(.large)
+                        }
+                    }
                 }
             }
         }
@@ -58,7 +86,7 @@ struct ExhibitorRow: View {
             AsyncImage(url: exhibitor.logoURL) { phase in
                 switch phase {
                 case .success(let image):
-                    image.resizable().scaledToFill()
+                    image.resizable().scaledToFit()
                 default:
                     RoundedRectangle(cornerRadius: 8)
                         .fill(OxpTheme.accent.opacity(0.15))
@@ -76,7 +104,7 @@ struct ExhibitorRow: View {
                 HStack(spacing: 6) {
                     Text(exhibitor.isStartup ? "Startup" : "Sponsor")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(exhibitor.isStartup ? .teal : OxpTheme.accent)
+                        .foregroundStyle(exhibitor.isStartup ? .teal : OxpTheme.accentInk)
                     if let country = exhibitor.country {
                         Text(country).font(.caption).foregroundStyle(.secondary)
                     }
@@ -109,7 +137,7 @@ struct ExhibitorDetailView: View {
                         .frame(maxHeight: 120)
                         .frame(maxWidth: .infinity)
                         .padding(20)
-                        .background(.background, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+                        .oxpCard()
 
                         Text(exhibitor.name).font(.largeTitle.bold())
                         if let slogan = exhibitor.slogan {
@@ -133,20 +161,22 @@ struct ExhibitorDetailView: View {
                             } label: {
                                 Label("Show expo halls", systemImage: "map")
                             }
-                            .buttonStyle(.glassProminent)
+                            .buttonStyle(.borderedProminent)
                             .tint(OxpTheme.accent)
+                            .controlSize(.large)
                         }
 
                         if let website = exhibitor.website {
                             Link(destination: website) {
                                 Label(website.host ?? "Website", systemImage: "globe")
                             }
-                            .buttonStyle(.glass)
+                            .buttonStyle(.bordered)
+                            .controlSize(.large)
                         }
                     }
                     .padding(20)
                 }
-                .background(Color(.systemGroupedBackground))
+                .oxpBackground()
                 .navigationTitle("Exhibitor")
                 .navigationBarTitleDisplayMode(.inline)
             } else {

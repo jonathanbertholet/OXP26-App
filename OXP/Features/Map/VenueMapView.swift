@@ -30,15 +30,12 @@ struct VenueMapView: View {
                 }
             }
             .navigationTitle("Map")
+            .oxpPreviewStatus()
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(Color(.systemBackground), for: .navigationBar)
             .searchable(text: $query, prompt: "Find a hall, room, or booth")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Picker("Map", selection: $layer) {
-                        ForEach(MapLayer.allCases, id: \.self) { Text($0.rawValue).tag($0) }
-                    }
-                    .pickerStyle(.segmented)
-                    .frame(width: 180)
-                }
                 if layer == .floor {
                     ToolbarItem(placement: .topBarLeading) {
                         roomMenu
@@ -55,20 +52,34 @@ struct VenueMapView: View {
                     }
                 }
             }
+            .safeAreaInset(edge: .top, spacing: 0) {
+                Picker("Map", selection: $layer) {
+                    ForEach(MapLayer.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(.bar)
+            }
             .safeAreaInset(edge: .bottom) {
                 if layer == .floor {
                     hallChips
+                        .background(.bar)
                 }
             }
             .navigationDestination(for: AppRoute.self) { Destinations.view(for: $0) }
             .onChange(of: router.selectedRoom) { _, name in
                 if let name {
+                    layer = .floor
                     router.selectedFloor = VenueLayout.floorPlan(forLocation: name)
                 }
             }
-            .onChange(of: router.mapPath) { _, path in
-                if path.isEmpty {
-                    router.clearMapFocus()
+            .onChange(of: router.highlightedExhibitorID) { _, id in
+                if id != nil { layer = .floor }
+            }
+            .onChange(of: router.tab) { _, tab in
+                if tab == .map, router.selectedRoom != nil || router.highlightedExhibitorID != nil {
+                    layer = .floor
                 }
             }
         }
@@ -108,12 +119,13 @@ struct VenueMapView: View {
             Text(item.title)
                 .font(.subheadline.weight(.semibold))
                 .padding(.horizontal, 14)
-                .padding(.vertical, 8)
+                .frame(minHeight: 44)
                 .foregroundStyle(selected ? Color.white : Color.primary)
-                .background(selected ? OxpTheme.accent : Color.clear, in: Capsule())
+                .background(selected ? OxpTheme.accent : Color(.secondarySystemGroupedBackground), in: Capsule())
+                .contentShape(Capsule())
         }
-        .buttonStyle(.glass)
-        .animation(.snappy(duration: 0.2), value: selected)
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(selected ? .isSelected : [])
     }
 }
 
@@ -166,17 +178,19 @@ struct FloorPlanView: View {
 
     var body: some View {
         GeometryReader { geo in
-            let mapSize = Self.contentSize(for: plan, in: geo.size)
+            let presentation = FloorPresentation(plan: plan, viewport: geo.size)
+            let mapSize = presentation.size
             ZoomableScrollView(
                 identity: "\(plan.rawValue)-\(zoomGeneration)",
                 contentSize: mapSize,
                 minimumZoomScale: 1,
-                focusRect: focusRect(in: mapSize),
+                focusRect: focusRect(in: presentation),
                 isZoomed: $isZoomed
             ) {
                 FloorMapCanvas(
                     plan: plan,
                     canvasSize: mapSize,
+                    rotated: presentation.rotated,
                     query: query,
                     highlightedRef: highlightedRef,
                     highlightedExhibitor: highlightedExhibitor,
@@ -184,7 +198,7 @@ struct FloorPlanView: View {
                 )
             }
         }
-        .background(FloorPalette.canvas)
+        .oxpBackground()
         .overlay(alignment: .top) {
             VStack(spacing: 8) {
                 if let exhibitor = highlightedExhibitor {
@@ -203,19 +217,6 @@ struct FloorPlanView: View {
         }
     }
 
-    /// Fit the whole simplified plan in the view; pinch in from there.
-    static func contentSize(for plan: FloorPlan, in view: CGSize) -> CGSize {
-        let view = CGSize(width: max(view.width, 1), height: max(view.height, 1))
-        if plan == .overview {
-            return view
-        }
-        let aspect = plan.aspect
-        if view.width / view.height > aspect {
-            return CGSize(width: view.height * aspect, height: view.height)
-        }
-        return CGSize(width: view.width, height: view.width / aspect)
-    }
-
     private func exhibitorBanner(_ exhibitor: Exhibitor) -> some View {
         let hint = exhibitor.isStartup
             ? "Startups sit around the Hall 7 bar. Stall numbers aren’t on the public list yet."
@@ -228,17 +229,12 @@ struct FloorPlanView: View {
             .padding(.horizontal, 12)
     }
 
-    private func focusRect(in size: CGSize) -> CGRect? {
+    private func focusRect(in presentation: FloorPresentation) -> CGRect? {
         guard let ref = highlightedRef,
               let norm = VenueLayout.normalizedFrame(ref: ref, on: plan),
               norm.width * norm.height < 0.14
         else { return nil }
-        return CGRect(
-            x: norm.minX * size.width,
-            y: norm.minY * size.height,
-            width: max(norm.width * size.width, 48),
-            height: max(norm.height * size.height, 48)
-        )
+        return presentation.frame(norm)
     }
 
     private func activate(kind: FloorHotspotKind, ref: String) {

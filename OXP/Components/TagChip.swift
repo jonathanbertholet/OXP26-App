@@ -170,8 +170,10 @@ struct SaveButton: View {
         Button(action: action) {
             Label(isSaved ? "Saved" : "Save", systemImage: isSaved ? "heart.fill" : "heart")
                 .symbolEffect(.bounce, value: isSaved)
+                .frame(minHeight: 24)
         }
-        .buttonStyle(.glassProminent)
+        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
         .tint(isSaved ? .pink : OxpTheme.accent)
         .sensoryFeedback(.impact(weight: .medium), trigger: isSaved)
         .accessibilityLabel(isSaved ? "Remove from saved talks" : "Save talk and remind me")

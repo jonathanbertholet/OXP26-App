@@ -56,6 +56,8 @@ struct RoomDetailView: View {
                 }
             }
         }
+        .scrollContentBackground(.hidden)
+        .oxpBackground()
         .navigationTitle(roomName)
         .navigationDestination(for: AppRoute.self) { Destinations.view(for: $0) }
     }
@@ -85,6 +87,8 @@ struct AmenityDetailView: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .scrollContentBackground(.hidden)
+        .oxpBackground()
         .navigationTitle(amenity?.title ?? "Place")
     }
 }
@@ -122,6 +126,8 @@ struct BoothRowDetailView: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .scrollContentBackground(.hidden)
+        .oxpBackground()
         .navigationTitle(row.map { "Booths \($0.letter)" } ?? "Booths")
     }
 }
@@ -154,6 +160,8 @@ struct BoothStallDetailView: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .scrollContentBackground(.hidden)
+        .oxpBackground()
         .navigationTitle(code)
         .navigationDestination(for: AppRoute.self) { Destinations.view(for: $0) }
     }

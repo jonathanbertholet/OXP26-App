@@ -35,7 +35,7 @@ enum TalkReminders {
         let fire = startsAt.addingTimeInterval(TimeInterval(-minutesBefore * 60))
         guard fire > .now else { return }
 
-        _ = await requestAccess()
+        guard await requestAccess() else { return }
 
         let content = UNMutableNotificationContent()
         content.title = track.name

@@ -76,6 +76,7 @@ final class TabRouter {
         selectedFloor = plan
         highlightedExhibitorID = exhibitorID
         selectedRoom = nil
+        mapPath = []
     }
 
     /// Drop the room/exhibitor lock so the map can unzoom and stop highlighting a hotspot.
@@ -88,7 +89,8 @@ final class TabRouter {
         tab = .map
         selectedRoom = name
         selectedFloor = VenueLayout.floorPlan(forLocation: name)
-        push(.room(name), on: .map)
+        highlightedExhibitorID = nil
+        mapPath = []
     }
 
     func push(_ route: AppRoute, on tab: AppTab? = nil) {

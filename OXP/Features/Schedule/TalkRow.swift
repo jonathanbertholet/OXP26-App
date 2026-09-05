@@ -1,12 +1,21 @@
 import SwiftUI
 
 struct TalkRow: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .headline) private var timeWidth: CGFloat = 56
+
     var track: Track
     var isSaved: Bool
     var showsDay: Bool = false
 
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {
+        let rowLayout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
+            : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
+        let metadataLayout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 4))
+            : AnyLayout(HStackLayout(spacing: 8))
+        return rowLayout {
             VStack(alignment: .leading, spacing: 2) {
                 Text(track.startTime ?? "TBA")
                     .font(.headline.monospacedDigit())
@@ -17,20 +26,27 @@ struct TalkRow: View {
                         .foregroundStyle(.tertiary)
                 }
             }
-            .frame(width: 56, alignment: .leading)
+            .padding(.leading, 8)
+            .frame(width: timeWidth + 8, alignment: .leading)
+            .overlay(alignment: .leading) {
+                Capsule()
+                    .fill((track.location.map(OxpTheme.roomColor) ?? OxpTheme.accent).gradient)
+                    .frame(width: 3)
+                    .accessibilityHidden(true)
+            }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(track.name)
                     .font(.headline)
                     .foregroundStyle(.primary)
-                    .lineLimit(3)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 3)
                 if let speaker = track.speakerLine {
                     Text(speaker)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .lineLimit(2)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                 }
-                HStack(spacing: 8) {
+                metadataLayout {
                     if showsDay, let weekday = track.weekday {
                         Text(weekday).font(.caption).foregroundStyle(.secondary)
                     }
@@ -51,7 +67,9 @@ struct TalkRow: View {
                 }
                 TalkTagStrip(track: track, compact: true)
             }
-            Spacer(minLength: 0)
+            if !dynamicTypeSize.isAccessibilitySize {
+                Spacer(minLength: 0)
+            }
         }
         .padding(.vertical, 4)
         .accessibilityElement(children: .combine)

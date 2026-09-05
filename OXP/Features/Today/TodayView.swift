@@ -24,8 +24,9 @@ struct TodayView: View {
                 }
                 .padding(.bottom, 32)
             }
-            .background(Color(.systemGroupedBackground))
+            .oxpBackground()
             .navigationTitle("Today")
+            .oxpPreviewStatus()
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     EventSwitcher()
@@ -52,56 +53,66 @@ struct TodayView: View {
     }
 
     private var hero: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 12) {
+            Label("YOUR CONFERENCE COMPANION", systemImage: "sparkles")
+                .font(.caption2.weight(.semibold))
+                .tracking(1.3)
+                .foregroundStyle(.white.opacity(0.8))
             Text(catalog.event?.name ?? "Odoo Experience")
-                .font(.largeTitle.bold())
+                .font(.title.bold())
+                .foregroundStyle(.white)
+                .fixedSize(horizontal: false, vertical: true)
             Text(heroSubtitle)
-                .font(.title3)
-                .foregroundStyle(.secondary)
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(.white.opacity(0.9))
             if let address = catalog.event?.venueAddress {
                 Label(address, systemImage: "mappin.and.ellipse")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .foregroundStyle(.white.opacity(0.8))
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(20)
-        .oxpGlass(in: RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .padding(24)
+        .oxpHero()
         .padding(.horizontal, 16)
         .padding(.top, 8)
     }
 
     private var heroSubtitle: String {
         if isDuringEvent {
-            return clock.now.formatted(date: .complete, time: .shortened)
+            return clock.now.formatted(
+                Date.FormatStyle(date: .complete, time: .shortened, timeZone: catalog.timeZone)
+            )
         }
         if let start = catalog.event?.startsOn, let days = daysUntil(start) {
             if days > 0 {
                 return "Opens in \(days) day\(days == 1 ? "" : "s") · \(catalog.event?.venueName ?? "")"
             }
-            return "It’s conference week."
+            if let end = catalog.event?.endsOn, clock.nowDay > end {
+                return "Thanks for being part of \(catalog.event?.shortName ?? "the experience")."
+            }
+            return catalog.event?.venueName ?? "Your conference starts here."
         }
         return catalog.event?.venueName ?? "Odoo Experience"
     }
 
     private var topicFilters: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Topics")
-                .font(.title2.bold())
+            OxpSectionHeading(title: "Topics", symbol: "square.grid.2x2")
                 .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     Button {
                         withAnimation(.snappy) { topicID = nil }
                     } label: {
-                        TagChip(text: "All", selected: topicID == nil)
+                        FilterChip(title: "All", selected: topicID == nil)
                     }
                     .buttonStyle(.plain)
                     ForEach(catalog.topicTags) { tag in
                         Button {
                             withAnimation(.snappy) { topicID = tag.id }
                         } label: {
-                            TagChip(text: tag.name, selected: topicID == tag.id)
+                            FilterChip(title: tag.name, selected: topicID == tag.id)
                         }
                         .buttonStyle(.plain)
                     }
@@ -129,25 +140,28 @@ struct TodayView: View {
             topicID == nil || track.tagIDs.contains(topicID!)
         }
         VStack(alignment: .leading, spacing: 12) {
-            Text("Your lineup")
-                .font(.title2.bold())
+            OxpSectionHeading(title: "Your lineup", symbol: "heart")
                 .padding(.horizontal, 20)
             if saved.isEmpty {
                 HStack(alignment: .top, spacing: 12) {
-                    Image(systemName: "heart")
-                        .font(.title2)
-                        .foregroundStyle(.pink)
+                    OxpIconTile(symbol: "heart", color: OxpTheme.accentInk)
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Nothing saved yet")
                             .font(.headline)
-                        Text("Heart a talk and OXP will remind you 15 minutes before it starts.")
+                        Text("Save talks to build your lineup and choose a reminder.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
+                        Button("Explore schedule", systemImage: "arrow.right") {
+                            router.tab = .schedule
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                        .padding(.top, 6)
                     }
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .oxpCard()
                 .padding(.horizontal, 16)
             } else {
                 ForEach(saved.prefix(8)) { track in
@@ -164,8 +178,7 @@ struct TodayView: View {
 
     private func section(_ title: String, tracks: [Track], showsDay: Bool) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(title)
-                .font(.title2.bold())
+            OxpSectionHeading(title: title, symbol: sectionSymbol(title))
                 .padding(.horizontal, 20)
             if tracks.isEmpty {
                 Text("Nothing in this topic right now.")
@@ -180,12 +193,21 @@ struct TodayView: View {
         }
     }
 
+    private func sectionSymbol(_ title: String) -> String {
+        switch title {
+        case "Happening now": "dot.radiowaves.left.and.right"
+        case "Up next": "clock"
+        default: "sparkles"
+        }
+    }
+
     private func talkCard(_ track: Track, showsDay: Bool) -> some View {
         NavigationLink(value: AppRoute.track(track.id)) {
             TalkRow(track: track, isSaved: favorites.isSaved(track.id), showsDay: showsDay)
                 .padding(14)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .oxpCard()
+                .contentShape(.rect(cornerRadius: 20))
         }
         .buttonStyle(.plain)
     }
@@ -226,7 +248,7 @@ struct PreviewSettingsSheet: View {
                         }
                     }
                 }
-                Text("Preview only changes what Today shows. Saved-talk notifications still fire at the real start time.")
+                Text("Preview changes live timing in Today, Schedule, and Map. Saved-talk reminders still use the real date.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 Section("About") {

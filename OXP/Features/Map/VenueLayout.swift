@@ -44,6 +44,32 @@ enum FloorPlan: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
+/// One transform for the artwork, controls, and focus rectangles.
+/// Turn wide halls in tall viewports; preserve their original proportions.
+struct FloorPresentation {
+    let rotated: Bool
+    let size: CGSize
+
+    init(plan: FloorPlan, viewport: CGSize) {
+        let available = CGSize(width: max(viewport.width - 24, 1), height: max(viewport.height - 24, 1))
+        rotated = plan.aspect > 1 && available.height > available.width
+        let aspect = rotated ? 1 / plan.aspect : plan.aspect
+        let width = min(available.width, available.height * aspect)
+        size = CGSize(width: width, height: width / aspect)
+    }
+
+    func normalized(_ rect: CGRect) -> CGRect {
+        guard rotated else { return rect }
+        return CGRect(x: 1 - rect.maxY, y: rect.minX, width: rect.height, height: rect.width)
+    }
+
+    func frame(_ rect: CGRect) -> CGRect {
+        let rect = normalized(rect)
+        return CGRect(x: rect.minX * size.width, y: rect.minY * size.height,
+                      width: rect.width * size.width, height: rect.height * size.height)
+    }
+}
+
 enum FloorHotspotKind: Hashable, Sendable {
     case hall(FloorPlan)
     case room

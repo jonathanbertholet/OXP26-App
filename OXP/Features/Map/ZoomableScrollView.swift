@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-/// Native pinch/pan zoom. Map buttons are the zooming content, so hits stay on the drawn shapes.
+/// Native pinch/pan with a centered resting position, including after resizing.
 struct ZoomableScrollView<Content: View>: UIViewRepresentable {
     var identity: String
     var contentSize: CGSize
@@ -10,20 +10,14 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
     @Binding var isZoomed: Bool
     @ViewBuilder var content: () -> Content
 
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
+    func makeCoordinator() -> Coordinator { Coordinator() }
 
-    func makeUIView(context: Context) -> UIScrollView {
-        let scroll = UIScrollView()
+    func makeUIView(context: Context) -> FloorScrollView {
+        let scroll = FloorScrollView()
         scroll.delegate = context.coordinator
-        scroll.minimumZoomScale = minimumZoomScale
         scroll.maximumZoomScale = 10
         scroll.bouncesZoom = true
-        scroll.bounces = true
-        scroll.alwaysBounceVertical = true
-        scroll.alwaysBounceHorizontal = true
-        scroll.decelerationRate = .fast
+        scroll.decelerationRate = .normal
         scroll.backgroundColor = .clear
         scroll.contentInsetAdjustmentBehavior = .never
         scroll.delaysContentTouches = false
@@ -36,118 +30,122 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
         host.view.insetsLayoutMarginsFromSafeArea = false
         host.safeAreaRegions = []
         host.sizingOptions = []
-        host.view.autoresizingMask = []
         scroll.addSubview(host.view)
-
         context.coordinator.host = host
         context.coordinator.scroll = scroll
-        context.coordinator.isZoomed = $isZoomed
-
-        let doubleTap = UITapGestureRecognizer(
-            target: context.coordinator,
-            action: #selector(Coordinator.handleFloorplanDoubleTap(_:))
-        )
+        scroll.onLayout = { [weak coordinator = context.coordinator] in
+            coordinator?.centerContent()
+        }
+        // A double tap on empty floor space zooms; room buttons retain immediate taps.
+        let doubleTap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.doubleTap(_:)))
         doubleTap.numberOfTapsRequired = 2
-        doubleTap.cancelsTouchesInView = false
+        doubleTap.delegate = context.coordinator
         scroll.addGestureRecognizer(doubleTap)
-
         return scroll
     }
 
-    func updateUIView(_ scroll: UIScrollView, context: Context) {
+    func updateUIView(_ scroll: FloorScrollView, context: Context) {
         let coordinator = context.coordinator
         coordinator.isZoomed = $isZoomed
         coordinator.host?.rootView = content()
-
+        scroll.minimumZoomScale = max(minimumZoomScale, 0.05)
         let size = CGSize(width: max(contentSize.width, 1), height: max(contentSize.height, 1))
-        let minZoom = max(minimumZoomScale, 0.05)
-        if abs(scroll.minimumZoomScale - minZoom) > 0.001 {
-            scroll.minimumZoomScale = minZoom
-        }
-        let atIdentityZoom = abs(scroll.zoomScale - 1) < 0.03
-
-        if coordinator.identity != identity {
-            let previousFocus = coordinator.lastFocus
+        let resized = coordinator.contentSize != size
+        let reset = coordinator.identity != identity || resized
+        if reset {
+            coordinator.focusGeneration += 1
             coordinator.identity = identity
+            coordinator.contentSize = size
             coordinator.lastFocus = nil
-            UIView.animate(withDuration: 0.36, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState]) {
-                scroll.zoomScale = 1
-                scroll.contentOffset = .zero
-            }
-            if let host = coordinator.host {
-                host.view.frame = CGRect(origin: .zero, size: size)
-                scroll.contentSize = size
-            }
-            coordinator.isZoomed?.wrappedValue = false
-            // Reset zoom used to nil lastFocus, then immediately zoom back to the same room.
-            if let focusRect, focusRect == previousFocus {
-                coordinator.lastFocus = focusRect
-            }
-        } else if atIdentityZoom, let host = coordinator.host {
-            host.view.frame = CGRect(origin: .zero, size: size)
+            scroll.setZoomScale(scroll.minimumZoomScale, animated: false)
+            // Set bounds and center, never a transformed frame.
+            coordinator.host?.view.bounds = CGRect(origin: .zero, size: size)
+            coordinator.host?.view.center = CGPoint(x: size.width / 2, y: size.height / 2)
             scroll.contentSize = size
+            coordinator.centerContent()
+            scroll.contentOffset = CGPoint(x: -scroll.contentInset.left, y: -scroll.contentInset.top)
+            coordinator.publishZoomState()
         }
-
-        if let focusRect, focusRect.width > 4, focusRect.height > 4, focusRect != coordinator.lastFocus {
+        if focusRect != coordinator.lastFocus {
             coordinator.lastFocus = focusRect
-            let padded = focusRect.insetBy(dx: -focusRect.width * 0.4, dy: -focusRect.height * 0.4)
-            DispatchQueue.main.async {
-                scroll.zoom(to: padded, animated: true)
+            coordinator.focusGeneration += 1
+            let generation = coordinator.focusGeneration
+            DispatchQueue.main.async { [weak coordinator] in
+                guard let coordinator, coordinator.focusGeneration == generation else { return }
+                if let focusRect {
+                    scroll.zoom(to: focusRect.insetBy(dx: -focusRect.width * 0.4, dy: -focusRect.height * 0.4),
+                                animated: !UIAccessibility.isReduceMotionEnabled)
+                } else {
+                    scroll.setZoomScale(scroll.minimumZoomScale, animated: !UIAccessibility.isReduceMotionEnabled)
+                }
             }
-        } else if focusRect == nil, coordinator.lastFocus != nil {
-            // Leaving a focused room must zoom back out; pinch zoom is left alone.
-            coordinator.lastFocus = nil
-            UIView.animate(withDuration: 0.36, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState]) {
-                scroll.zoomScale = 1
-                scroll.contentOffset = .zero
-            }
-            coordinator.isZoomed?.wrappedValue = false
         }
     }
 
-    final class Coordinator: NSObject, UIScrollViewDelegate {
+    final class Coordinator: NSObject, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         var host: UIHostingController<Content>?
-        weak var scroll: UIScrollView?
+        weak var scroll: FloorScrollView?
         var identity = ""
+        var contentSize = CGSize.zero
         var lastFocus: CGRect?
+        var focusGeneration = 0
         var isZoomed: Binding<Bool>?
 
-        func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-            host?.view
-        }
+        func viewForZooming(in scrollView: UIScrollView) -> UIView? { host?.view }
 
         func scrollViewDidZoom(_ scrollView: UIScrollView) {
-            isZoomed?.wrappedValue = scrollView.zoomScale > max(scrollView.minimumZoomScale, 1) * 1.05
-            centerContent(in: scrollView)
+            centerContent()
+            publishZoomState()
         }
 
-        func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-            isZoomed?.wrappedValue = scale > max(scrollView.minimumZoomScale, 1) * 1.05
-        }
-
-        func centerContent(in scrollView: UIScrollView) {
-            guard let view = host?.view else { return }
-            let extraX = max((scrollView.bounds.width - view.frame.width) / 2, 0)
-            let extraY = max((scrollView.bounds.height - view.frame.height) / 2, 0)
-            scrollView.contentInset = UIEdgeInsets(top: extraY, left: extraX, bottom: extraY, right: extraX)
-        }
-
-        @objc func handleFloorplanDoubleTap(_ gesture: UITapGestureRecognizer) {
-            guard let scroll, let host else { return }
-            if scroll.zoomScale > 1.15 {
-                scroll.setZoomScale(1, animated: true)
-                return
+        func publishZoomState() {
+            DispatchQueue.main.async { [weak self] in
+                guard let self, let scroll else { return }
+                let zoomed = scroll.zoomScale > scroll.minimumZoomScale * 1.05
+                if isZoomed?.wrappedValue != zoomed { isZoomed?.wrappedValue = zoomed }
             }
-            let point = gesture.location(in: host.view)
-            let size = scroll.bounds.size
-            let zoom: CGFloat = 3.4
-            let rect = CGRect(
-                x: point.x - size.width / (2 * zoom),
-                y: point.y - size.height / (2 * zoom),
-                width: size.width / zoom,
-                height: size.height / zoom
-            )
-            scroll.zoom(to: rect, animated: true)
+        }
+
+        func centerContent() {
+            guard let scroll, let view = host?.view else { return }
+            let x = max((scroll.bounds.width - view.frame.width) / 2, 0)
+            let y = max((scroll.bounds.height - view.frame.height) / 2, 0)
+            let inset = UIEdgeInsets(top: y, left: x, bottom: y, right: x)
+            if scroll.contentInset != inset { scroll.contentInset = inset }
+        }
+
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+            var view = touch.view
+            while let current = view, current !== scroll {
+                if current is UIControl { return false }
+                view = current.superview
+            }
+            return true
+        }
+
+        @objc func doubleTap(_ gesture: UITapGestureRecognizer) {
+            guard let scroll, let host else { return }
+            let animated = !UIAccessibility.isReduceMotionEnabled
+            if scroll.zoomScale > scroll.minimumZoomScale * 1.15 {
+                scroll.setZoomScale(scroll.minimumZoomScale, animated: animated)
+            } else {
+                let point = gesture.location(in: host.view)
+                let zoom = min(scroll.minimumZoomScale * 2.5, scroll.maximumZoomScale)
+                let size = CGSize(width: scroll.bounds.width / zoom, height: scroll.bounds.height / zoom)
+                scroll.zoom(to: CGRect(x: point.x - size.width / 2, y: point.y - size.height / 2,
+                                       width: size.width, height: size.height), animated: animated)
+            }
         }
     }
+}
+
+final class FloorScrollView: UIScrollView {
+    var onLayout: (() -> Void)?
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        onLayout?()
+    }
+
+    override func touchesShouldCancel(in view: UIView) -> Bool { true }
 }

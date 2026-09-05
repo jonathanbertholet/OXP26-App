@@ -6,6 +6,7 @@ struct FloorMapCanvas: View {
 
     var plan: FloorPlan
     var canvasSize: CGSize
+    var rotated: Bool = false
     var query: String
     var highlightedRef: String?
     var highlightedExhibitor: Exhibitor?
@@ -15,7 +16,6 @@ struct FloorMapCanvas: View {
         let size = CGSize(width: max(canvasSize.width, 1), height: max(canvasSize.height, 1))
         ZStack {
             FloorPalette.canvas
-            StarfieldBackground()
             artwork(in: size)
             AbsoluteMapLayout(size: size) {
                 ForEach(sortedFeatures) { feature in
@@ -46,9 +46,12 @@ struct FloorMapCanvas: View {
             Image(name)
                 .resizable()
                 .interpolation(.high)
+                .frame(width: rotated ? size.height : size.width, height: rotated ? size.width : size.height)
+                .rotationEffect(.degrees(rotated ? 90 : 0))
                 .frame(width: size.width, height: size.height)
                 .opacity(query.isEmpty ? 1 : 0.28)
                 .allowsHitTesting(false)
+                .accessibilityHidden(true)
         }
     }
 
@@ -113,7 +116,9 @@ struct FloorMapCanvas: View {
                         .padding(8)
                 }
             }
-            .contentShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+            .frame(width: frame.width, height: frame.height)
+            .frame(minWidth: 44, minHeight: 44)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .opacity(dimmed ? 0.2 : 1)
@@ -152,6 +157,10 @@ struct FloorMapCanvas: View {
     }
 
     private func fill(for feature: FloorFeature, emphasized: Bool, hasArtwork: Bool) -> Color {
+        if rotated, feature.kind != .hall(.hall6), feature.kind != .hall(.hall7),
+           feature.kind != .hall(.hall10), feature.kind != .hall(.hall11) {
+            return emphasized ? OxpTheme.accent : Color(red: 0.18, green: 0.14, blue: 0.24)
+        }
         if hasArtwork, !emphasized {
             return .clear
         }
@@ -183,7 +192,7 @@ struct FloorMapCanvas: View {
     }
 
     private func fontSize(for frame: CGRect) -> CGFloat {
-        max(8, min(frame.width, frame.height) * 0.16)
+        max(10, min(18, min(frame.width, frame.height) * 0.24))
     }
 
     private func shouldHighlightForExpo(feature: FloorFeature) -> Bool {
@@ -195,7 +204,10 @@ struct FloorMapCanvas: View {
     }
 
     private func pixel(_ frame: CGRect, in size: CGSize) -> CGRect {
-        CGRect(
+        let frame = rotated
+            ? CGRect(x: 1 - frame.maxY, y: frame.minX, width: frame.height, height: frame.width)
+            : frame
+        return CGRect(
             x: frame.minX * size.width,
             y: frame.minY * size.height,
             width: frame.width * size.width,
@@ -216,8 +228,8 @@ private struct AbsoluteMapLayout: Layout {
         for subview in subviews {
             let frame = subview[MapFrameKey.self]
             subview.place(
-                at: CGPoint(x: bounds.minX + frame.minX, y: bounds.minY + frame.minY),
-                anchor: .topLeading,
+                at: CGPoint(x: bounds.minX + frame.midX, y: bounds.minY + frame.midY),
+                anchor: .center,
                 proposal: ProposedViewSize(width: frame.width, height: frame.height)
             )
         }
@@ -231,21 +243,5 @@ private struct MapFrameKey: LayoutValueKey {
 private extension View {
     func mapFrame(_ rect: CGRect) -> some View {
         layoutValue(key: MapFrameKey.self, value: rect)
-    }
-}
-
-private struct StarfieldBackground: View {
-    var body: some View {
-        Canvas { context, size in
-            for i in 0..<90 {
-                let seed = CGFloat(i * 47)
-                let x = (seed * 1.37).truncatingRemainder(dividingBy: max(size.width, 1))
-                let y = (seed * 2.11).truncatingRemainder(dividingBy: max(size.height, 1))
-                let radius: CGFloat = i.isMultiple(of: 7) ? 1.4 : 0.7
-                let rect = CGRect(x: x, y: y, width: radius * 2, height: radius * 2)
-                context.fill(Path(ellipseIn: rect), with: .color(.white.opacity(0.18)))
-            }
-        }
-        .allowsHitTesting(false)
     }
 }

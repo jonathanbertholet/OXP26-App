@@ -67,7 +67,7 @@ private struct AgendaScrollCanvas: View {
     @State private var containerWidth: CGFloat = 0
 
     private let gutterWidth: CGFloat = 52
-    private let headerHeight: CGFloat = 40
+    private let headerHeight: CGFloat = 48
     private let columnGap: CGFloat = 4
 
     var body: some View {
@@ -275,7 +275,7 @@ private struct AgendaRoomHeaderBar: View {
                         .foregroundStyle(pinned ? Color.white : color)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
-                        .frame(width: columnWidth, height: 36)
+                        .frame(width: columnWidth, height: 44)
                         .background(
                             pinned ? color : Color(.secondarySystemGroupedBackground),
                             in: RoundedRectangle(cornerRadius: 8, style: .continuous)
@@ -290,7 +290,7 @@ private struct AgendaRoomHeaderBar: View {
         .padding(.leading, gutterWidth)
         .padding(.trailing, 10)
         .padding(.bottom, 4)
-        .frame(height: 40, alignment: .bottom)
+        .frame(height: 48, alignment: .bottom)
         .background(.background)
     }
 
@@ -315,7 +315,7 @@ private struct AgendaTimeGutter: View {
                     .font(.caption2.monospacedDigit().weight(.semibold))
                     .foregroundStyle(.secondary)
                     .frame(width: gutterWidth - 6, alignment: .trailing)
-                    .offset(y: CGFloat(minute - dayStartMinute) * minuteHeight - 7)
+                    .offset(y: max(2, CGFloat(minute - dayStartMinute) * minuteHeight - 7))
             }
         }
         .padding(.top, headerHeight)

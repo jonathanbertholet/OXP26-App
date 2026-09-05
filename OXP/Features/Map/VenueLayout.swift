@@ -22,17 +22,17 @@ enum FloorPlan: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
-    var imageName: String? {
+    var summary: String {
         switch self {
-        case .overview: nil
-        case .hall6: "MapHall6"
-        case .hall7: "MapHall7"
-        case .hall11: "MapHall11"
-        case .hall10: "MapHall10"
+        case .overview: "Choose a hall"
+        case .hall6: "Stages 6.A–E · Booths A–G"
+        case .hall7: "Stages 7.A–B · Booths H–Q"
+        case .hall11: "Main stage · Auditorium 4000"
+        case .hall10: "Odoo village · Auditorium 2000"
         }
     }
 
-    /// Width / height of the simplified plan artwork.
+    /// Width / height of the source plan, shared by drawings and hit targets.
     var aspect: CGFloat {
         switch self {
         case .overview: 0.72
@@ -49,24 +49,84 @@ enum FloorPlan: String, CaseIterable, Identifiable, Sendable {
 struct FloorPresentation {
     let rotated: Bool
     let size: CGSize
+    let drawingFrame: CGRect
 
-    init(plan: FloorPlan, viewport: CGSize) {
-        let available = CGSize(width: max(viewport.width - 24, 1), height: max(viewport.height - 24, 1))
-        rotated = plan.aspect > 1 && available.height > available.width
+    init(plan: FloorPlan, viewport: CGSize, padding: CGFloat = 24, includesDirections: Bool = true) {
+        let available = CGSize(width: max(viewport.width - padding, 1), height: max(viewport.height - padding, 1))
+        let rotated = plan.aspect > 1 && available.height > available.width
+        self.rotated = rotated
         let aspect = rotated ? 1 / plan.aspect : plan.aspect
-        let width = min(available.width, available.height * aspect)
-        size = CGSize(width: width, height: width / aspect)
+        let edges = includesDirections && plan != .overview
+            ? Set(VenueLayout.features(on: plan).compactMap { feature -> FloorMapEdge? in
+                guard case .hall = feature.kind else { return nil }
+                return Self.edge(for: Self.normalized(feature.frame, rotated: rotated))
+            }) : []
+        let horizontalMargin = min(44, max((available.width - 1) / 2, 0))
+        let verticalMargin = min(44, max((available.height - 1) / 2, 0))
+        let left = edges.contains(.left) ? horizontalMargin : 0
+        let right = edges.contains(.right) ? horizontalMargin : 0
+        let top = edges.contains(.top) ? verticalMargin : 0
+        let bottom = edges.contains(.bottom) ? verticalMargin : 0
+        let width = min(available.width - left - right, (available.height - top - bottom) * aspect)
+        drawingFrame = CGRect(x: left, y: top, width: width, height: width / aspect)
+        size = CGSize(width: width + left + right, height: width / aspect + top + bottom)
     }
 
     func normalized(_ rect: CGRect) -> CGRect {
+        Self.normalized(rect, rotated: rotated)
+    }
+
+    static func normalized(_ rect: CGRect, rotated: Bool) -> CGRect {
         guard rotated else { return rect }
         return CGRect(x: 1 - rect.maxY, y: rect.minX, width: rect.height, height: rect.width)
     }
 
     func frame(_ rect: CGRect) -> CGRect {
         let rect = normalized(rect)
-        return CGRect(x: rect.minX * size.width, y: rect.minY * size.height,
-                      width: rect.width * size.width, height: rect.height * size.height)
+        return CGRect(x: drawingFrame.minX + rect.minX * drawingFrame.width,
+                      y: drawingFrame.minY + rect.minY * drawingFrame.height,
+                      width: rect.width * drawingFrame.width, height: rect.height * drawingFrame.height)
+    }
+
+    func directionEdge(for rect: CGRect) -> FloorMapEdge {
+        Self.edge(for: normalized(rect))
+    }
+
+    /// Hall links sit in reserved space outside the drawing and remain aligned
+    /// with their source connection, including when the hall rotates.
+    func directionFrame(for rect: CGRect) -> CGRect {
+        let anchor = frame(rect)
+        let width = min(44, size.width)
+        let height = min(44, size.height)
+        let x = min(max(anchor.midX - width / 2, 0), size.width - width)
+        let y = min(max(anchor.midY - height / 2, 0), size.height - height)
+        switch directionEdge(for: rect) {
+        case .left: return CGRect(x: 0, y: y, width: width, height: height)
+        case .right: return CGRect(x: size.width - width, y: y, width: width, height: height)
+        case .top: return CGRect(x: x, y: 0, width: width, height: height)
+        case .bottom: return CGRect(x: x, y: size.height - height, width: width, height: height)
+        }
+    }
+
+    private static func edge(for rect: CGRect) -> FloorMapEdge {
+        let distances: [(FloorMapEdge, CGFloat)] = [
+            (.left, rect.midX), (.right, 1 - rect.midX),
+            (.top, rect.midY), (.bottom, 1 - rect.midY),
+        ]
+        return distances.min { $0.1 < $1.1 }!.0
+    }
+}
+
+enum FloorMapEdge: Hashable {
+    case left, right, top, bottom
+
+    var symbol: String {
+        switch self {
+        case .left: "arrow.left"
+        case .right: "arrow.right"
+        case .top: "arrow.up"
+        case .bottom: "arrow.down"
+        }
     }
 }
 
@@ -114,6 +174,10 @@ struct FloorFeature: Identifiable, Hashable, Sendable {
 
     var catalogLocations: [String] {
         VenueLayout.catalogLocations(for: ref)
+    }
+
+    var accessibilityTitle: String {
+        catalogLocations.count > 1 ? "\(title), \(catalogLocations.joined(separator: ", "))" : title
     }
 }
 
@@ -180,6 +244,7 @@ enum VenueLayout {
         .init(id: "startup-area", title: "Startup area", symbol: "sparkles", detail: "Startup booths clustered around the Hall 7 bar. Individual booth numbers are not on the public exhibitor list yet."),
         .init(id: "ceo-lounge", title: "CEO lounge", symbol: "arrow.up.circle.fill", detail: "Upstairs from Hall 11, via the stairs beside the main stage."),
         .init(id: "parking-c", title: "Parking C", symbol: "car.fill", detail: "Entrance from Parking C feeds Hall 6 and Hall 7."),
+        .init(id: "entrance-hall10", title: "Entrance", symbol: "door.left.hand.open", detail: "Hall 10 entrance, directly below the welcome desk on the map."),
     ]
 
     static let features: [FloorFeature] = overviewFeatures + hall6Features + hall7Features + hall11Features + hall10Features
@@ -281,7 +346,8 @@ enum VenueLayout {
         guard !q.isEmpty else { return true }
         let compact = q.replacingOccurrences(of: " ", with: "")
         return titles.contains { title in
-            title.localizedStandardContains(q) || title.localizedStandardContains(compact)
+            title.localizedStandardContains(q)
+                || title.replacingOccurrences(of: " ", with: "").localizedStandardContains(compact)
         }
     }
 
@@ -319,7 +385,7 @@ enum VenueLayout {
 
     private static let hall6Stalls: [BoothStall] =
         pairedPlug("A", 24, r(0.147, 0.346, 0.226, 0.068), .hall6)
-        + weightedBare("B", [2, 1, 1, 1, 1, 1, 2], r(0.147, 0.479, 0.270, 0.080), .hall6)
+        + weightedBare("B", [2, 1, 1, 1, 1, 1, 2], r(0.147, 0.479, 0.226, 0.080), .hall6)
         + pairedPlug("C", 24, r(0.147, 0.596, 0.226, 0.071), .hall6)
         + pairedPlug("D", 16, r(0.427, 0.346, 0.165, 0.068), .hall6)
         + weightedBare("E", [2, 1, 1, 2], r(0.427, 0.479, 0.165, 0.080), .hall6)
@@ -371,19 +437,18 @@ enum VenueLayout {
     private static let hall11Features: [FloorFeature] = [
         feat("Main stage", .hall11, 0.12, 0.10, 0.76, 0.68, .room),
         feat("Welcome desk", .hall11, 0.34, 0.80, 0.32, 0.05, .amenity, id: "welcome-hall11"),
-        feat("CEO lounge", .hall11, 0.248, 0.855, 0.094, 0.049, .amenity, id: "ceo-lounge"),
+        feat("CEO lounge", .hall11, 0.10, 0.82, 0.22, 0.075, .amenity, id: "ceo-lounge"),
         feat("Hall 7", .hall11, 0.02, 0.28, 0.10, 0.36, .hall(.hall7), id: "to-hall-7"),
-        feat("Hall 10", .hall11, 0.34, 0.92, 0.32, 0.05, .hall(.hall10), id: "to-hall-10"),
     ]
 
     // MARK: - Hall 10 (Odoo village)
 
     private static let hall10Features: [FloorFeature] = [
-        feat("Auditorium 2000", .hall10, 0.334, 0.248, 0.497, 0.083, .room),
-        feat("Odoo village", .hall10, 0.333, 0.330, 0.498, 0.481, .amenity, id: "odoo-village"),
+        feat("Auditorium 2000", .hall10, 0.285, 0.12, 0.59, 0.18, .room),
+        feat("Odoo village", .hall10, 0.333, 0.34, 0.498, 0.471, .amenity, id: "odoo-village"),
         feat("Welcome desk", .hall10, 0.387, 0.814, 0.395, 0.073, .amenity, id: "welcome-hall10"),
         feat("Hall 7", .hall10, 0.04, 0.26, 0.20, 0.10, .hall(.hall7), id: "to-hall-7"),
-        feat("Hall 11", .hall10, 0.334, 0.04, 0.497, 0.18, .hall(.hall11), id: "to-hall-11"),
+        feat("Entrance", .hall10, 0.387, 0.92, 0.395, 0.05, .amenity, id: "entrance-hall10"),
     ]
 
     // MARK: - Geometry helpers
@@ -577,12 +642,12 @@ enum VenueLayout {
 }
 
 enum FloorPalette {
-    static let canvas = Color(red: 0.11, green: 0.06, blue: 0.18)
-    static let hallFill = Color.white.opacity(0.06)
-    static let roomFill = Color.white.opacity(0.12)
-    static let amenityFill = Color(red: 0.35, green: 0.22, blue: 0.42).opacity(0.85)
-    static let stroke = Color.white.opacity(0.55)
-    static let label = Color.white
+    static let card = Color(.secondarySystemGroupedBackground)
+    static let hallFill = Color(.tertiarySystemGroupedBackground)
+    static let amenityInk = Color(red: 0.20, green: 0.53, blue: 0.49)
+    static let stroke = Color.primary.opacity(0.18)
+    static let label = Color.primary
+    static let selection = OxpTheme.accentInk
 
     static func stallFill(_ kind: StallKind) -> Color {
         switch kind {

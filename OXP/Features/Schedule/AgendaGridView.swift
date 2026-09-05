@@ -113,6 +113,17 @@ private struct AgendaScrollCanvas: View {
             }
         }
         .overlay(alignment: .topLeading) {
+            AgendaTimeGutter(
+                marks: layout.hourMarks,
+                dayStartMinute: layout.dayStartMinute,
+                minuteHeight: minuteHeight,
+                gutterWidth: gutterWidth,
+                headerHeight: headerHeight,
+                canvasHeight: canvasHeight,
+                verticalOffset: scrollOrigin.y
+            )
+        }
+        .overlay(alignment: .topLeading) {
             AgendaRoomHeaderBar(
                 columns: layout.columns,
                 columnWidth: columnWidth,
@@ -121,16 +132,6 @@ private struct AgendaScrollCanvas: View {
                 focusedColumns: $focusedColumns
             )
             .offset(x: -scrollOrigin.x)
-        }
-        .overlay(alignment: .topLeading) {
-            AgendaTimeGutter(
-                marks: layout.hourMarks,
-                dayStartMinute: layout.dayStartMinute,
-                minuteHeight: minuteHeight,
-                gutterWidth: gutterWidth,
-                headerHeight: headerHeight
-            )
-            .offset(y: -scrollOrigin.y)
         }
         .overlay(alignment: .topLeading) {
             Button {
@@ -307,6 +308,8 @@ private struct AgendaTimeGutter: View {
     var minuteHeight: CGFloat
     var gutterWidth: CGFloat
     var headerHeight: CGFloat
+    var canvasHeight: CGFloat
+    var verticalOffset: CGFloat
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -319,8 +322,17 @@ private struct AgendaTimeGutter: View {
             }
         }
         .padding(.top, headerHeight)
-        .frame(width: gutterWidth, alignment: .top)
-        .background(.background)
+        .frame(width: gutterWidth, height: canvasHeight + headerHeight + 8, alignment: .topLeading)
+        .offset(y: -verticalOffset)
+        // The labels follow vertical scrolling, but this opaque rail always fills
+        // the viewport, including during bounce and underneath wide talk cards.
+        .frame(width: gutterWidth, alignment: .topLeading)
+        .frame(maxHeight: .infinity, alignment: .topLeading)
+        .background(Color(.systemBackground))
+        .overlay(alignment: .trailing) {
+            Rectangle().fill(Color.primary.opacity(0.08)).frame(width: 1)
+        }
+        .clipped()
         .allowsHitTesting(false)
     }
 }

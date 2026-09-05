@@ -24,6 +24,9 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
         scroll.canCancelContentTouches = true
         scroll.showsHorizontalScrollIndicator = false
         scroll.showsVerticalScrollIndicator = false
+        // At fit size, the enclosing hall pager owns one-finger dragging.
+        // Pinch and double-tap zoom remain available on this scroll view.
+        scroll.panGestureRecognizer.isEnabled = false
 
         let host = UIHostingController(rootView: content())
         host.view.backgroundColor = .clear
@@ -80,6 +83,7 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
                 }
             }
         }
+        coordinator.updatePanAvailability()
     }
 
     final class Coordinator: NSObject, UIScrollViewDelegate, UIGestureRecognizerDelegate {
@@ -95,7 +99,16 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
 
         func scrollViewDidZoom(_ scrollView: UIScrollView) {
             centerContent()
+            updatePanAvailability()
             publishZoomState()
+        }
+
+        func updatePanAvailability() {
+            guard let scroll else { return }
+            let enabled = scroll.zoomScale > scroll.minimumZoomScale * 1.05
+            if scroll.panGestureRecognizer.isEnabled != enabled {
+                scroll.panGestureRecognizer.isEnabled = enabled
+            }
         }
 
         func publishZoomState() {

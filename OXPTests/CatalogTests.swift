@@ -101,6 +101,23 @@ struct AgendaLayoutTests {
 }
 
 struct VenueLayoutTests {
+    @Test func compactStageSearchFindsTheSharedAuditorium() throws {
+        let mainStage = try #require(VenueLayout.feature(ref: "Main stage", on: .hall11))
+        for suffix in ["A", "B", "C", "D"] {
+            #expect(VenueLayout.matchesFeature(mainStage, query: "4000\(suffix)"))
+            #expect(VenueLayout.matchesFeature(mainStage, query: "4000 \(suffix)"))
+            #expect(mainStage.accessibilityTitle.contains("Auditorium 4000 \(suffix)"))
+        }
+        #expect(!VenueLayout.matchesFeature(mainStage, query: "4000E"))
+        let auditorium = try #require(VenueLayout.feature(ref: "Auditorium 2000", on: .hall10))
+        let village = try #require(VenueLayout.feature(ref: "odoo-village", on: .hall10))
+        let welcome = try #require(VenueLayout.feature(ref: "welcome-hall10", on: .hall10))
+        let entrance = try #require(VenueLayout.feature(ref: "entrance-hall10", on: .hall10))
+        #expect(auditorium.frame.maxY < village.frame.minY)
+        #expect(village.frame.maxY < welcome.frame.minY)
+        #expect(welcome.frame.maxY < entrance.frame.minY)
+    }
+
     @Test func officialPlansCoverTalkRooms() {
         #expect(VenueLayout.feature(ref: "Hall 6.A", on: .hall6) != nil)
         #expect(VenueLayout.feature(ref: "Hall 7.B", on: .hall7) != nil)
@@ -136,11 +153,11 @@ struct FloorPresentationTests {
         for plan in [FloorPlan.hall6, .hall7] {
             let portrait = FloorPresentation(plan: plan, viewport: CGSize(width: 390, height: 600))
             #expect(portrait.rotated)
-            #expect(abs(portrait.size.width / portrait.size.height - 1 / plan.aspect) < 0.001)
+            #expect(abs(portrait.drawingFrame.width / portrait.drawingFrame.height - 1 / plan.aspect) < 0.001)
             #expect(portrait.size.height == 576)
             let landscape = FloorPresentation(plan: plan, viewport: CGSize(width: 900, height: 500))
             #expect(!landscape.rotated)
-            #expect(abs(landscape.size.width / landscape.size.height - plan.aspect) < 0.001)
+            #expect(abs(landscape.drawingFrame.width / landscape.drawingFrame.height - plan.aspect) < 0.001)
         }
     }
 
@@ -165,9 +182,26 @@ struct FloorPresentationTests {
                 let layout = FloorPresentation(plan: plan, viewport: viewport)
                 #expect(!layout.rotated)
                 #expect(layout.size.width > 0 && layout.size.height > 0)
-                #expect(abs(layout.size.width / layout.size.height - plan.aspect) < 0.001)
+                #expect(abs(layout.drawingFrame.width / layout.drawingFrame.height - plan.aspect) < 0.001)
                 #expect(layout.size.width <= max(viewport.width - 24, 1))
                 #expect(layout.size.height <= max(viewport.height - 24, 1) + 0.001)
+            }
+        }
+    }
+
+    @Test func hallDirectionsStayOutsideTheDrawingAndInsideTheViewport() {
+        for viewport in [CGSize(width: 390, height: 600), CGSize(width: 900, height: 500)] {
+            for plan in FloorPlan.allCases where plan != .overview {
+                let presentation = FloorPresentation(plan: plan, viewport: viewport)
+                for feature in VenueLayout.features(on: plan) {
+                    guard case .hall = feature.kind else { continue }
+                    let direction = presentation.directionFrame(for: feature.frame)
+                    #expect(direction.intersection(presentation.drawingFrame).isEmpty)
+                    #expect(direction.width == 44 && direction.height == 44)
+                    #expect(direction.minX >= 0 && direction.minY >= 0)
+                    #expect(direction.maxX <= presentation.size.width + 0.001)
+                    #expect(direction.maxY <= presentation.size.height + 0.001)
+                }
             }
         }
     }

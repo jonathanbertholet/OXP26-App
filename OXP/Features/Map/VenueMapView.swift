@@ -98,14 +98,23 @@ struct VenueMapView: View {
 
     private var hallChips: some View {
         @Bindable var router = router
-        return ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                ForEach(FloorPlan.allCases) { item in
-                    hallChip(item, selected: router.selectedFloor == item)
+        return ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(FloorPlan.allCases) { item in
+                        hallChip(item, selected: router.selectedFloor == item)
+                            .id(item)
+                    }
                 }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
+            .onChange(of: router.selectedFloor) { _, selected in
+                withAnimation(.snappy) { proxy.scrollTo(selected, anchor: .center) }
+            }
+            .onAppear {
+                proxy.scrollTo(router.selectedFloor, anchor: .center)
+            }
         }
     }
 
@@ -165,8 +174,10 @@ struct FloorPlanView: View {
     var highlightedExhibitorID: Int?
     var selectedRoom: String?
 
-    @State private var isZoomed = false
+    @State private var zoomedPlans: [FloorPlan: Bool] = [:]
     @State private var zoomGeneration = 0
+
+    private var isZoomed: Bool { zoomedPlans[plan] == true }
 
     private var highlightedRef: String? {
         selectedRoom.map(VenueLayout.hotspotID(forLocation:))
@@ -178,25 +189,21 @@ struct FloorPlanView: View {
 
     var body: some View {
         GeometryReader { geo in
-            let presentation = FloorPresentation(plan: plan, viewport: geo.size)
-            let mapSize = presentation.size
-            ZoomableScrollView(
-                identity: "\(plan.rawValue)-\(zoomGeneration)",
-                contentSize: mapSize,
-                minimumZoomScale: 1,
-                focusRect: focusRect(in: presentation),
-                isZoomed: $isZoomed
-            ) {
-                FloorMapCanvas(
-                    plan: plan,
-                    canvasSize: mapSize,
-                    rotated: presentation.rotated,
-                    query: query,
-                    highlightedRef: highlightedRef,
-                    highlightedExhibitor: highlightedExhibitor,
-                    onActivate: activate
-                )
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: 0) {
+                    ForEach(FloorPlan.allCases) { page in
+                        hallPage(page, viewport: geo.size)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                            .accessibilityHidden(page != plan)
+                            .id(page)
+                    }
+                }
+                .scrollTargetLayout()
             }
+            .scrollIndicators(.hidden)
+            .scrollTargetBehavior(.paging)
+            .scrollPosition(id: pageSelection)
+            .scrollDisabled(isZoomed)
         }
         .oxpBackground()
         .overlay(alignment: .top) {
@@ -208,12 +215,46 @@ struct FloorPlanView: View {
                     Button("Reset zoom", systemImage: "arrow.counterclockwise") {
                         router.clearMapFocus()
                         zoomGeneration += 1
-                        isZoomed = false
+                        zoomedPlans[plan] = false
                     }
                     .buttonStyle(.glass)
                 }
             }
             .padding(12)
+        }
+        .onChange(of: plan) { previous, _ in
+            if zoomedPlans[previous] == true { zoomGeneration += 1 }
+        }
+    }
+
+    private var pageSelection: Binding<FloorPlan?> {
+        Binding(
+            get: { plan },
+            set: { next in
+                guard let next, next != plan else { return }
+                router.clearMapFocus()
+                plan = next
+            }
+        )
+    }
+
+    private func hallPage(_ page: FloorPlan, viewport: CGSize) -> some View {
+        let presentation = FloorPresentation(plan: page, viewport: viewport)
+        return ZoomableScrollView(
+            identity: "\(page.rawValue)-\(zoomGeneration)",
+            contentSize: presentation.size,
+            minimumZoomScale: 1,
+            focusRect: page == plan ? focusRect(in: presentation) : nil,
+            isZoomed: Binding(get: { zoomedPlans[page] == true }, set: { zoomedPlans[page] = $0 })
+        ) {
+            FloorMapCanvas(
+                plan: page,
+                presentation: presentation,
+                query: query,
+                highlightedRef: page == plan ? highlightedRef : nil,
+                highlightedExhibitor: page == plan ? highlightedExhibitor : nil,
+                onActivate: activate
+            )
         }
     }
 
@@ -255,6 +296,7 @@ struct FloorPlanView: View {
             router.push(.boothRow(ref), on: .map)
         }
     }
+
 }
 
 private struct BoothLegend: View {

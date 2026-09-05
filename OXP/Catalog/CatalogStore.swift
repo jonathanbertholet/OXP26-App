@@ -7,7 +7,7 @@ final class CatalogStore {
     private(set) var isRefreshing = false
     private(set) var lastCheckedAt: Date?
     private(set) var refreshError: String?
-    private var lastAttempt: Date?
+    private var lastAttempt: Date? = UserDefaults.standard.object(forKey: "oxp.agendaLastAttempt") as? Date
     private(set) var bundle: CatalogBundle?
     private(set) var payload: CatalogPayload?
     private(set) var loadError: String?
@@ -52,11 +52,28 @@ final class CatalogStore {
         }
     }
 
+    static func automaticRefreshIsDue(at now: Date, lastAttempt: Date?) -> Bool {
+        // Published 2026 program dates, including masterclasses, in UTC.
+        let windows = [
+            ("2026-09-08T18:30:00Z", "2026-09-12T18:30:00Z"),
+            ("2026-09-21T22:00:00Z", "2026-09-26T22:00:00Z")
+        ]
+        let formatter = ISO8601DateFormatter()
+        let active = windows.contains { start, end in
+            guard let start = formatter.date(from: start), let end = formatter.date(from: end) else { return false }
+            return now >= start && now < end
+        }
+        return active && (lastAttempt.map { now.timeIntervalSince($0) >= 7200 } ?? true)
+    }
+
     func refresh(force: Bool = false) async {
         guard let baseline = bundle, !isRefreshing else { return }
-        if !force, let lastAttempt, Date.now.timeIntervalSince(lastAttempt) < 300 { return }
+        if !force {
+            guard Self.automaticRefreshIsDue(at: .now, lastAttempt: lastAttempt ?? lastCheckedAt) else { return }
+        }
         isRefreshing = true
         lastAttempt = .now
+        UserDefaults.standard.set(lastAttempt, forKey: "oxp.agendaLastAttempt")
         defer { isRefreshing = false }
         do {
             let result = try await feed.refresh(comparedTo: baseline)

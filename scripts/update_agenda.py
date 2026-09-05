@@ -89,6 +89,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--baseline', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--events', nargs='+', choices=['in', 'be'], default=['in', 'be'])
     args = parser.parse_args()
     bundle = json.loads(args.baseline.read_text())
     bundle['schema_version'] = 1
@@ -101,7 +102,12 @@ def main():
         tags = list({t['id']: t for p in bundle['events'] for t in p['tags']}.values())
     specs = {s['id']: s for s in EVENTS}
     results, failures = [], []
+    attempted = 0
     for previous in bundle['events']:
+        if previous['event']['code'] not in args.events:
+            results.append(previous)
+            continue
+        attempted += 1
         try:
             updated = update_event(previous, specs[previous['event']['id']], fetcher, tags, now)
             print(f"Updated {previous['event']['name']}: {len(updated['tracks'])} talks", flush=True)
@@ -110,7 +116,7 @@ def main():
             failures.append(previous['event']['code'])
             print(f"::warning::Retaining {previous['event']['code']}: {exc}", flush=True)
             results.append(previous)
-    if len(failures) == len(results):
+    if len(failures) == attempted:
         raise RuntimeError('All sources failed; previous feed retained')
     bundle.update(events=results, generated_at=now.isoformat(timespec='seconds'), failed_events=failures)
     validate(bundle)

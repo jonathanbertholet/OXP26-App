@@ -3,6 +3,24 @@ import Testing
 @testable import OXP
 
 struct CatalogFeedTests {
+    @Test @MainActor func automaticChecksOnlyRunDuringEventsAtTwoHourIntervals() throws {
+        let formatter = ISO8601DateFormatter()
+        for (raw, expected) in [
+            ("2026-09-05T12:00:00Z", false),
+            ("2026-09-08T18:29:59Z", false),
+            ("2026-09-08T18:30:00Z", true),
+            ("2026-09-12T18:30:00Z", false),
+            ("2026-09-21T22:00:00Z", true),
+            ("2026-09-26T22:00:00Z", false),
+            ("2027-09-09T12:00:00Z", false)
+        ] {
+            let now = try #require(formatter.date(from: raw))
+            #expect(CatalogStore.automaticRefreshIsDue(at: now, lastAttempt: nil) == expected)
+            #expect(!CatalogStore.automaticRefreshIsDue(at: now, lastAttempt: now.addingTimeInterval(-7199)))
+            #expect(CatalogStore.automaticRefreshIsDue(at: now, lastAttempt: now.addingTimeInterval(-7200)) == expected)
+        }
+    }
+
     private func remote() throws -> CatalogBundle {
         var bundle = try CatalogDecoder.loadBundled()
         bundle.schemaVersion = 1

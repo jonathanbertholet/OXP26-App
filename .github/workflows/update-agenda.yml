@@ -2,9 +2,12 @@ name: Update agenda
 on:
   workflow_dispatch:
   schedule:
-    - cron: '7,22,37,52 * * * *'
+    # UTC envelope around local India and Belgium event dates; the gate below
+    # enforces exact local dates, the year, and a two-hour minimum interval.
+    - cron: '7 */2 8-12,21-26 9 *'
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: agenda-feed
   cancel-in-progress: false
@@ -14,42 +17,55 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: pip
-      - run: pip install -r requirements.txt
-      - run: python -m unittest discover -s scripts/tests
-      - name: Get last published agenda
+      - name: Check event window
+        id: window
+        run: python3 scripts/agenda_schedule.py
+      - name: Stop scheduling after Belgium
+        if: steps.window.outputs.action == 'disable'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method PUT "repos/${GITHUB_REPOSITORY}/actions/workflows/update-agenda.yml/disable"
+      - name: Get last published agenda and attempt
+        if: steps.window.outputs.action == 'refresh'
         run: |
           git fetch origin codex/agenda-feed
           mkdir -p /tmp/agenda-output
           git show origin/codex/agenda-feed:catalog.json > /tmp/agenda-baseline.json
-      - name: Refresh when due
+          git show origin/codex/agenda-feed:last-attempt.txt > /tmp/agenda-attempt.txt 2>/dev/null || true
+      - name: Check two-hour interval
+        if: steps.window.outputs.action == 'refresh'
         id: due
-        env:
-          MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
-        run: |
-          python - <<'PY'
-          import json, os
-          from datetime import datetime, timezone, timedelta
-          b = json.load(open('/tmp/agenda-baseline.json'))
-          now = datetime.now(timezone.utc)
-          active = any(p['event'].get('starts_on') and p['event'].get('ends_on') and datetime.fromisoformat(p['event']['starts_on']).date() - timedelta(days=1) <= now.date() <= datetime.fromisoformat(p['event']['ends_on']).date() for p in b['events'])
-          age = (now - datetime.fromisoformat(b.get('generated_at', '2000-01-01T00:00:00+00:00'))).total_seconds()
-          due = os.environ['MANUAL'] == 'true' or age >= (600 if active else 3500)
-          with open(os.environ['GITHUB_OUTPUT'], 'a') as f: f.write(f"run={str(due).lower()}\n")
-          PY
-      - if: steps.due.outputs.run == 'true'
-        run: python scripts/update_agenda.py --baseline /tmp/agenda-baseline.json --output /tmp/agenda-output/catalog.json
-      - name: Publish validated feed
-        if: steps.due.outputs.run == 'true'
+        run: python3 scripts/agenda_schedule.py --baseline /tmp/agenda-baseline.json --attempt /tmp/agenda-attempt.txt
+      - if: steps.due.outputs.action == 'refresh'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - if: steps.due.outputs.action == 'refresh'
+        run: pip install -r requirements.txt
+      - if: steps.due.outputs.action == 'refresh'
+        run: python -m unittest discover -s scripts/tests
+      - name: Record attempt before contacting Odoo
+        if: steps.due.outputs.action == 'refresh'
         run: |
           git worktree add /tmp/agenda-publish origin/codex/agenda-feed
-          cp /tmp/agenda-output/catalog.json /tmp/agenda-publish/catalog.json
           cd /tmp/agenda-publish
           git config user.name 'OXP Agenda Bot'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          date -u +%Y-%m-%dT%H:%M:%S+00:00 > last-attempt.txt
+          git add last-attempt.txt
+          git commit -m 'Record agenda refresh attempt'
+          git push origin HEAD:codex/agenda-feed
+      - name: Refresh active edition only
+        if: steps.due.outputs.action == 'refresh'
+        env:
+          EDITIONS: ${{ steps.due.outputs.events }}
+        run: python scripts/update_agenda.py --baseline /tmp/agenda-baseline.json --output /tmp/agenda-output/catalog.json --events $EDITIONS
+      - name: Publish validated feed
+        if: steps.due.outputs.action == 'refresh'
+        run: |
+          cp /tmp/agenda-output/catalog.json /tmp/agenda-publish/catalog.json
+          cd /tmp/agenda-publish
           git add catalog.json
           git diff --cached --quiet || git commit -m 'Refresh agenda from Odoo'
           git push origin HEAD:codex/agenda-feed

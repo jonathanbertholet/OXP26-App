@@ -32,7 +32,7 @@ struct RootTabView: View {
             guard scenePhase == .active else { return }
             while !Task.isCancelled {
                 await catalog.refresh()
-                try? await Task.sleep(for: .seconds(300))
+                try? await Task.sleep(for: .seconds(7200))
             }
         }
         .onChange(of: catalog.bundle?.generatedAt) {

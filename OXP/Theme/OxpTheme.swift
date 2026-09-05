@@ -131,6 +131,70 @@ struct OxpPageIntro: View {
     }
 }
 
+/// A persistent disclosure that keeps OXP's independent status clear without competing with app content.
+struct OxpIndependenceFooter: View {
+    @State private var isShowingNotice = false
+
+    var body: some View {
+        Button {
+            isShowingNotice = true
+        } label: {
+            HStack(spacing: 6) {
+                Text("Built with ♥ from Brussels · Not an official app")
+                    .font(.caption2.weight(.medium))
+                    .multilineTextAlignment(.center)
+                Image(systemName: "chevron.right")
+                    .font(.caption2.weight(.semibold))
+            }
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Built with love from Brussels. Not an official app.")
+        .accessibilityHint("Shows OXP's independence notice")
+        .background(.bar)
+        .overlay(alignment: .top) {
+            Divider()
+        }
+        .sheet(isPresented: $isShowingNotice) {
+            OxpIndependenceNotice()
+        }
+    }
+}
+
+private struct OxpIndependenceNotice: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 20) {
+                Image(systemName: "heart.fill")
+                    .font(.title2)
+                    .foregroundStyle(.secondary)
+                    .accessibilityHidden(true)
+                Text("Built with love from Brussels")
+                    .font(.title2.bold())
+                Text("Unofficial companion for Odoo Experience. This is an independent project and is not an official Odoo product. Views expressed are personal and do not represent Odoo S.A.")
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding(24)
+            .navigationTitle("About OXP")
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
+                }
+            }
+        }
+        .presentationDetents([.medium])
+    }
+}
+
 extension OxpTheme {
     /// Keep text accents legible on dark surfaces without changing filled controls.
     static let accentInk = Color(uiColor: UIColor { traits in

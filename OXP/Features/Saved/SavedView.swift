@@ -89,6 +89,9 @@ struct SavedView: View {
                 }
             }
         }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            OxpIndependenceFooter()
+        }
     }
 
     @ViewBuilder

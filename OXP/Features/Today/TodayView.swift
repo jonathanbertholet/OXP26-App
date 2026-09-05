@@ -47,6 +47,9 @@ struct TodayView: View {
                 topicID = nil
             }
         }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            OxpIndependenceFooter()
+        }
     }
 
     private var isDuringEvent: Bool {

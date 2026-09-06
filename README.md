@@ -1,6 +1,6 @@
 # OXP — Odoo Experience companion
 
-Unofficial native iOS app and seed data for [Odoo Experience 2026](https://www.odoo.com/event/odoo-experience-2026-9099). Regional editions are **separate events** (Belgium, Americas, LATAM, Africa, India). Talks, speakers, and rooms are never merged. The Brussels Expo map is Belgium-only.
+Unofficial native iOS and Android apps and seed data for [Odoo Experience 2026](https://www.odoo.com/event/odoo-experience-2026-9099). Regional editions are **separate events** (Belgium, Americas, LATAM, Africa, India). Talks, speakers, and rooms are never merged. The Brussels Expo map is Belgium-only.
 
 ```bash
 git clone https://github.com/jonathanbertholet/OXP26-App.git
@@ -62,6 +62,19 @@ xed OXP.xcodeproj
 ```
 
 Run the **OXP** scheme on an iPhone. Before the selected event starts, use Today → the clock button to preview a conference day.
+
+## Android app
+
+The native Kotlin / Jetpack Compose port is in [`android/`](android/README.md). It supports Android 8.0+, shares the iOS catalog and vector venue geometry, and includes Today, Schedule, Map, Expo, Saved, offline feed updates, and local reminders.
+
+Open `android/` in Android Studio, or use JDK 17+ and Android SDK 36.1:
+
+```bash
+cd android
+./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
+```
+
+The installable debug APK is `android/app/build/outputs/apk/debug/app-debug.apk`. See the [Android guide](android/README.md) for reminder permissions and release signing.
 
 ## SQLite sketch
 

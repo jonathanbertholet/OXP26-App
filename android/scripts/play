@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+
+OXP_ANDROID_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$OXP_ANDROID_ROOT"
+export BUNDLE_PATH="$OXP_ANDROID_ROOT/vendor/bundle"
+export BUNDLE_APP_CONFIG="$OXP_ANDROID_ROOT/.bundle"
+export FASTLANE_SKIP_UPDATE_CHECK=1
+export FASTLANE_HIDE_CHANGELOG=1
+export FASTLANE_OPT_OUT_USAGE=1
+if [ -z "${SUPPLY_JSON_KEY:-}" ] && [ -z "${GOOGLE_APPLICATION_CREDENTIALS:-}" ] && [ -f "$OXP_ANDROID_ROOT/.secrets/google-play.json" ]; then
+  export SUPPLY_JSON_KEY="$OXP_ANDROID_ROOT/.secrets/google-play.json"
+fi
+exec bundle exec fastlane "$@"

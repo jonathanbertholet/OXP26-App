@@ -1,0 +1,77 @@
+default_platform(:android)
+
+ANDROID_ROOT = File.expand_path("..", __dir__)
+PACKAGE_NAME = "be.oxp.app"
+
+def play_credentials!
+  path = ENV["SUPPLY_JSON_KEY"] || ENV["GOOGLE_APPLICATION_CREDENTIALS"]
+  UI.user_error!("Google Play is not connected. Set SUPPLY_JSON_KEY to the local Google credentials file; see PUBLISHING.md.") if path.to_s.empty?
+  path = File.expand_path(path)
+  UI.user_error!("The Google credentials file does not exist.") unless File.file?(path)
+  path
+end
+
+def upload_signing!
+  local = File.join(ANDROID_ROOT, ".secrets/upload.properties")
+  variables = %w[OXP_UPLOAD_STORE_FILE OXP_UPLOAD_STORE_PASSWORD OXP_UPLOAD_KEY_ALIAS OXP_UPLOAD_KEY_PASSWORD]
+  UI.user_error!("Upload signing is missing; see PUBLISHING.md.") unless File.file?(local) || variables.all? { |key| !ENV[key].to_s.empty? }
+end
+
+platform :android do
+  private_lane :verify_bundle do |options|
+    java_home = ENV["JAVA_HOME"]
+    verifier = java_home.to_s.empty? ? "jarsigner" : File.join(java_home, "bin/jarsigner")
+    result = sh(verifier, "-verify", options[:path], log: false)
+    UI.user_error!("The bundle is unsigned or its signature could not be verified.") unless result.include?("jar verified.") && !result.include?("unsigned entries")
+    UI.success("Release bundle signature verified.")
+  end
+
+  desc "Check local publishing setup without making remote changes"
+  lane :doctor do
+    upload_signing!
+    UI.success("Upload signing configured for #{PACKAGE_NAME}.")
+    key = ENV["SUPPLY_JSON_KEY"] || ENV["GOOGLE_APPLICATION_CREDENTIALS"]
+    if key.to_s.empty?
+      UI.important("Google Play API credentials are not configured yet. See PUBLISHING.md.")
+    else
+      play_credentials!
+      UI.success("Google credentials file found. Run check_connection to test app access.")
+    end
+  end
+
+  desc "Authenticate to Google Play and read the internal track (no release changes)"
+  lane :check_connection do
+    key = play_credentials!
+    codes = google_play_track_version_codes(package_name: PACKAGE_NAME, json_key: key, track: "internal")
+    UI.success("Connected to #{PACKAGE_NAME}. Internal version codes: #{codes.join(', ')}")
+  end
+
+  desc "Build a signed release bundle locally; optional version_code and version_name"
+  lane :build_release do |options|
+    upload_signing!
+    properties = {}
+    if options[:version_code]
+      code = Integer(options[:version_code].to_s, 10)
+      UI.user_error!("version_code must be positive") unless code > 0
+      properties["oxpVersionCode"] = code
+    end
+    properties["oxpVersionName"] = options[:version_name] if options[:version_name]
+    gradle(task: ":app:bundleRelease", project_dir: ANDROID_ROOT, properties: properties)
+    verify_bundle(path: File.join(ANDROID_ROOT, "app/build/outputs/bundle/release/app-release.aab"))
+  end
+
+  desc "Upload the signed bundle as an internal draft, ready for review in Play Console"
+  lane :upload_internal_draft do
+    key = play_credentials!
+    bundle = File.join(ANDROID_ROOT, "app/build/outputs/bundle/release/app-release.aab")
+    UI.user_error!("Build the signed bundle with build_release first.") unless File.file?(bundle)
+    verify_bundle(path: bundle)
+    upload_to_play_store(
+      package_name: PACKAGE_NAME, json_key: key, aab: bundle,
+      track: "internal", release_status: "draft",
+      changes_not_sent_for_review: true, rescue_changes_not_sent_for_review: true,
+      skip_upload_apk: true, skip_upload_metadata: true,
+      skip_upload_changelogs: true, skip_upload_images: true, skip_upload_screenshots: true
+    )
+  end
+end

@@ -10,3 +10,22 @@ DerivedData/
 screenshots/raw/
 *.xcarchive
 *.ipa
+
+# Android local build state
+android/.gradle/
+android/.kotlin/
+android/**/build/
+android/local.properties
+android/.idea/
+*.jks
+*.keystore
+
+# Google Play publishing tools and local secrets
+android/vendor/bundle/
+android/.bundle/
+android/.secrets/
+android/fastlane/report.xml
+android/fastlane/README.md
+android/.env
+android/.env.*
+!android/.env.example

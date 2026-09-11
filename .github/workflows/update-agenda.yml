@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Check event window
         id: window
         run: python3 scripts/agenda_schedule.py
@@ -37,7 +37,7 @@ jobs:
         id: due
         run: python3 scripts/agenda_schedule.py --baseline /tmp/agenda-baseline.json --attempt /tmp/agenda-attempt.txt
       - if: steps.due.outputs.action == 'refresh'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: pip
